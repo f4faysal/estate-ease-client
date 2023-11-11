@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 import * as z from "zod";
 
 import ImageUpload from "@/components/image-upload";
+import SelectInputField from "@/components/select-input-fild";
 import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import {
@@ -19,34 +20,24 @@ import {
 import FormHading from "@/components/ui/form-hading";
 import { Heading } from "@/components/ui/heading";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { genderOptionObject } from "@/constants/global";
-import { useCreateAdminMutation } from "@/redux/api/usersApi";
-import { adminFormSchema } from "@/schemas/admin";
+import { bloodGroupsOption, genderOptionObject } from "@/constants/global";
+
+import { userFormSchema } from "@/schemas/rent-user";
 
 const SignUp = () => {
-  const [createAdmin] = useCreateAdminMutation();
-
-  const form = useForm<z.infer<typeof adminFormSchema>>({
-    resolver: zodResolver(adminFormSchema),
+  const form = useForm<z.infer<typeof userFormSchema>>({
+    resolver: zodResolver(userFormSchema),
     defaultValues: {},
   });
 
-  const onSubmit = async (values: z.infer<typeof adminFormSchema>) => {
+  const onSubmit = async (values: z.infer<typeof userFormSchema>) => {
     try {
       console.log(values);
-      // const res = await createAdmin(values);
+      // const res = await createrentUser(values);
       // console.log(res);
       form.reset();
-      toast.success("Admin created successfully");
+      toast.success("rentUser created successfully");
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
@@ -71,7 +62,7 @@ const SignUp = () => {
                     <div className="">
                       <FormField
                         control={form.control}
-                        name="admin.name.firstName"
+                        name="rentUser.name.firstName"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>First Name</FormLabel>
@@ -90,7 +81,7 @@ const SignUp = () => {
                     <div className="">
                       <FormField
                         control={form.control}
-                        name="admin.name.middleName"
+                        name="rentUser.name.middleName"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Middle Name</FormLabel>
@@ -109,7 +100,7 @@ const SignUp = () => {
                     <div className=".">
                       <FormField
                         control={form.control}
-                        name="admin.name.lastName"
+                        name="rentUser.name.lastName"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Last Name</FormLabel>
@@ -130,7 +121,7 @@ const SignUp = () => {
                     <div className=".">
                       <FormField
                         control={form.control}
-                        name="admin.email"
+                        name="rentUser.email"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Email</FormLabel>
@@ -150,7 +141,7 @@ const SignUp = () => {
                     <div className=".">
                       <FormField
                         control={form.control}
-                        name="admin.dateOfBirth"
+                        name="rentUser.dateOfBirth"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Det of Birth</FormLabel>
@@ -159,6 +150,7 @@ const SignUp = () => {
                                 // disabled={loading}
                                 placeholder="Select Date"
                                 {...field}
+                                type="date"
                               />
                             </FormControl>
                             <FormMessage />
@@ -171,7 +163,7 @@ const SignUp = () => {
                     <div className=".">
                       <FormField
                         control={form.control}
-                        name="admin.contactNo"
+                        name="rentUser.contactNo"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Contact No</FormLabel>
@@ -179,6 +171,7 @@ const SignUp = () => {
                               <Input
                                 // disabled={loading}
                                 placeholder="Contact No"
+                                type="tel"
                                 {...field}
                               />
                             </FormControl>
@@ -190,7 +183,7 @@ const SignUp = () => {
                     <div className=".">
                       <FormField
                         control={form.control}
-                        name="admin.emergencyContactNo"
+                        name="rentUser.emergencyContactNo"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Emergency Contact No</FormLabel>
@@ -199,6 +192,7 @@ const SignUp = () => {
                                 // disabled={loading}
                                 placeholder="Emergency Contact No"
                                 {...field}
+                                type="tel"
                               />
                             </FormControl>
                             <FormMessage />
@@ -207,37 +201,84 @@ const SignUp = () => {
                       />
                     </div>
                   </div>
+                </div>
+                {/* Basic Info */}
+                <div className="border mt-3 px-3 py-5 rounded-md shadow">
+                  <FormHading title="Basic Information" />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="">
                       <FormField
                         control={form.control}
-                        name="admin.gender"
+                        name="rentUser.gender"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Gender</FormLabel>
                             <FormControl>
-                              {/* <Input
+                              <SelectInputField
+                                field={field}
+                                placeholder="Select a gender"
+                                mapData={genderOptionObject}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                    <div className="">
+                      <FormField
+                        control={form.control}
+                        name="rentUser.bloodGroup"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Blood Group</FormLabel>
+                            <FormControl>
+                              <SelectInputField
+                                field={field}
+                                placeholder="Select a Blood Group"
+                                mapData={bloodGroupsOption}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className=".">
+                      <FormField
+                        control={form.control}
+                        name="rentUser.presentAddress"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Present Address</FormLabel>
+                            <FormControl>
+                              <Input
                                 // disabled={loading}
-                                placeholder="Gender"
+                                placeholder="Street, City, Country"
                                 {...field}
-                              /> */}
-                              <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                              >
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select a gender" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectGroup>
-                                    {genderOptionObject.map((item, i) => (
-                                      <SelectItem key={i} value={item.value}>
-                                        {item.label}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectGroup>
-                                </SelectContent>
-                              </Select>
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                    <div className=".">
+                      <FormField
+                        control={form.control}
+                        name="rentUser.permanentAddress"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Permanent Address</FormLabel>
+                            <FormControl>
+                              <Input
+                                // disabled={loading}
+                                placeholder="Street, City, Country"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -246,13 +287,13 @@ const SignUp = () => {
                     </div>
                   </div>
                 </div>
-                {/* Admin info */}
+                {/* User info */}
                 <div className="border mt-3 px-3 py-5 rounded-md shadow">
                   <FormHading title="User Information" />
                   <div className="mb-4">
                     <FormField
                       control={form.control}
-                      name="admin.profileImage"
+                      name="rentUser.profileImage"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Profile image</FormLabel>
@@ -273,15 +314,16 @@ const SignUp = () => {
                     <div className=".">
                       <FormField
                         control={form.control}
-                        name="admin.designation"
+                        name="password"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Designation</FormLabel>
+                            <FormLabel>Password</FormLabel>
                             <FormControl>
                               <Input
                                 // disabled={loading}
-                                placeholder="Designation"
+                                placeholder="Password"
                                 {...field}
+                                type="password"
                               />
                             </FormControl>
                             <FormMessage />
@@ -302,28 +344,6 @@ const SignUp = () => {
                                 placeholder="National Identity Card No"
                                 type="number"
                                 {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className=".">
-                      <FormField
-                        control={form.control}
-                        name="password"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Password</FormLabel>
-                            <FormControl>
-                              <Input
-                                // disabled={loading}
-                                placeholder="Password"
-                                {...field}
-                                type="password"
                               />
                             </FormControl>
                             <FormMessage />

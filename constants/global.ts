@@ -1,15 +1,37 @@
 export const bloodGroupsOption = [
-  "A+",
-  "A-",
-  "B+",
-  "B-",
-  "AB+",
-  "AB-",
-  "O+",
-  "O-",
+  {
+    label: "A+",
+    value: "A+",
+  },
+  {
+    label: "A-",
+    value: "A-",
+  },
+  {
+    label: "B+",
+    value: "B+",
+  },
+  {
+    label: "B-",
+    value: "B-",
+  },
+  {
+    label: "AB+",
+    value: "AB+",
+  },
+  {
+    label: "AB-",
+    value: "AB-",
+  },
+  {
+    label: "O+",
+    value: "O+",
+  },
+  {
+    label: "O-",
+    value: "O-",
+  },
 ];
-
-export const genderOption = ["male", "female", "other"];
 
 export const designationOption = ["Accountant", "Manager", "Director"];
 
