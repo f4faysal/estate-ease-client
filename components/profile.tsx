@@ -54,7 +54,7 @@ const Profile = () => {
 
   const handelLogOut = () => {
     localStorage.removeItem(authKey);
-    window.location.href = "/sign-in";
+    window.location.href = "/";
   };
 
   if (isLoading) {

@@ -1,3 +1,5 @@
+"use client";
+
 import { getUserInfo } from "@/services/auth.service";
 import { LogIn } from "lucide-react";
 import Image from "next/image";
