@@ -19,7 +19,16 @@ import {
 import FormHading from "@/components/ui/form-hading";
 import { Heading } from "@/components/ui/heading";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { genderOptionObject } from "@/constants/global";
 import { useCreateAdminMutation } from "@/redux/api/usersApi";
 import { adminFormSchema } from "@/schemas/admin";
 
@@ -34,8 +43,8 @@ const SignUp = () => {
   const onSubmit = async (values: z.infer<typeof adminFormSchema>) => {
     try {
       console.log(values);
-      const res = await createAdmin(values);
-      console.log(res);
+      // const res = await createAdmin(values);
+      // console.log(res);
       form.reset();
       toast.success("Admin created successfully");
     } catch (error) {
@@ -207,11 +216,28 @@ const SignUp = () => {
                           <FormItem>
                             <FormLabel>Gender</FormLabel>
                             <FormControl>
-                              <Input
+                              {/* <Input
                                 // disabled={loading}
                                 placeholder="Gender"
                                 {...field}
-                              />
+                              /> */}
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                              >
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select a gender" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectGroup>
+                                    {genderOptionObject.map((item, i) => (
+                                      <SelectItem key={i} value={item.value}>
+                                        {item.label}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectGroup>
+                                </SelectContent>
+                              </Select>
                             </FormControl>
                             <FormMessage />
                           </FormItem>

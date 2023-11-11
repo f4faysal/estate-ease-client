@@ -12,7 +12,7 @@ export const adminSchema = z.object({
   contactNo: z.string().min(11),
   emergencyContactNo: z.string(),
   designation: z.string().min(1),
-  profileImage: z.string().url(),
+  profileImage: z.string().optional(),
 });
 
 export const adminFormSchema = z.object({
