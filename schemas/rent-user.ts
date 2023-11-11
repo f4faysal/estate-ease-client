@@ -9,8 +9,8 @@ export const adminSchema = z.object({
   gender: z.string(),
   dateOfBirth: z.string(),
   email: z.string().email(),
-  contactNo: z.number().min(11),
-  emergencyContactNo: z.number().min(11),
+  contactNo: z.string().min(11),
+  emergencyContactNo: z.string().min(11),
   profileImage: z.string().url(),
   bloodGroup: z.string(),
   presentAddress: z.string(),
@@ -20,7 +20,7 @@ export const adminSchema = z.object({
 });
 
 export const userFormSchema = z.object({
-  nidNumber: z.number().min(10),
+  nidNumber: z.string().min(10),
   password: z.string().min(6),
   rentUser: adminSchema,
 });

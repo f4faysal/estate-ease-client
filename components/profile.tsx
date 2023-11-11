@@ -44,6 +44,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 const Profile = () => {
   const dispatch = useDispatch();
   const { data, isLoading } = useMyProfileQuery({});
+
   const user = useSelector((state: any) => state.user.profile);
 
   useEffect(() => {
@@ -66,7 +67,11 @@ const Profile = () => {
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Avatar>
-            <AvatarImage src={user?.admin?.profileImage} />
+            <AvatarImage
+              src={
+                user?.rentUser?.profileImage || user?.homeOwner?.profileImage
+              }
+            />
             <AvatarFallback>AD</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
@@ -75,7 +80,7 @@ const Profile = () => {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <Link href={`/${params.adminId}/profile`}>
+            <Link href={`/${user?.id}/profile`}>
               <DropdownMenuItem>
                 <User className="mr-2 h-4 w-4" />
                 <span>Profile</span>

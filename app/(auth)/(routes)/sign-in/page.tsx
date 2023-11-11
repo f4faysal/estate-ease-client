@@ -1,4 +1,4 @@
-import LoginPage from "@/components/ui/auth/rentUser/login";
+import LoginPage from "@/components/ui/auth/login";
 
 const SignIn = () => {
   return (
