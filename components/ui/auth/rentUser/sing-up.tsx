@@ -40,10 +40,14 @@ const UserSignUp = () => {
       console.log(values);
       const res: any = await createRentUserMutation(values);
       console.log(res);
-      form.reset();
-      router.push("/");
-      storeUserInfo({ accessToken: res?.data?.accessToken });
-      toast.success("rentUser created successfully");
+      if (res?.data?.accessToken) {
+        form.reset();
+        router.push("/");
+        storeUserInfo({ accessToken: res?.data?.accessToken });
+        toast.success("rentUser created successfully");
+      } else {
+        toast(res?.error);
+      }
     } catch (error) {
       toast.error("Something went wrong");
     } finally {

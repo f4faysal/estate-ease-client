@@ -2,10 +2,9 @@ import { MdCheckCircle } from "react-icons/md";
 
 const HomeBuying = () => {
   return (
-    // text pull requst
-    <div className="relative">
-      <div className=" relative mx-auto lg:w-[1500px] lg:h-[600px]">
-        <div className="w-full h-full flex justify-center items-center flex-col lg:flex-row">
+    <div className="relative mt-28 border rounded-lg">
+      <div className=" mx-auto md:h-[600px]">
+        <div className="w-full h-full flex justify-center items-center flex-col lg:flex-row gap-6">
           <div className="w-1/2 ">
             <div className=" ">
               {/* <Image
@@ -69,7 +68,7 @@ const HomeBuying = () => {
           </div>
         </div>
       </div>
-      <div className="hidden md:block absolute bottom-0 w-full h-[200px] bg-[#aad4f6] opacity-25 border "></div>
+      <div className="w-full hidden md:block absolute bottom-0 rounded-lg h-[200px] bg-[#aad4f6] opacity-25 border "></div>
     </div>
   );
 };

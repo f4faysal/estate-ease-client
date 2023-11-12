@@ -11,9 +11,9 @@ import Container from "./ui/container";
 
 const NavBar = () => {
   const { role }: any = getUserInfo();
-  console.log(role);
+
   return (
-    <div className="border-b">
+    <nav className="border-b bg-[#EBF6FF]">
       <Container>
         <div className="flex h-16 items-center px-4">
           <Link href="/">
@@ -40,7 +40,7 @@ const NavBar = () => {
           </div>
         </div>
       </Container>
-    </div>
+    </nav>
   );
 };
 

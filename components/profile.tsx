@@ -45,6 +45,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const { data, isLoading } = useMyProfileQuery({});
 
+  console.log(data);
   const user = useSelector((state: any) => state.user.profile);
 
   useEffect(() => {
