@@ -1,8 +1,9 @@
+import Image from "next/image";
 import { MdCheckCircle } from "react-icons/md";
 
 const HomeBuying = () => {
   return (
-    <div className="relative mt-28 border rounded-lg">
+    <div className="relative mt-28  rounded-lg">
       <div className=" mx-auto md:h-[600px]">
         <div className="w-full h-full flex justify-center items-center flex-col lg:flex-row gap-6">
           <div className="w-1/2 ">
@@ -14,13 +15,49 @@ const HomeBuying = () => {
             width={50}
             className="rounded-full"
           /> */}
-              <div className=" hidden md:block absolute top-2 left-[400px]  h-52 w-52 bg-slate-500 rounded-full"></div>
+              <div className=" hidden md:block absolute top-2 left-[400px]  h-52 w-52 bg-slate-500 rounded-full overflow-hidden">
+                <Image
+                  src="/assets/buying/1.webp"
+                  alt=""
+                  height={1100}
+                  width={1100}
+                  style={{
+                    objectFit: "cover",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                />
+              </div>
               {/* mobile device show */}
-              <div className="z-50 lg:absolute top-[100px] w-full h-7 md:h-96 md:w-96 bg-slate-500 rounded-full"></div>
+              <div className="z-50 lg:absolute top-[100px] w-full h-7 md:h-96 md:w-96 bg-slate-500 rounded-full overflow-hidden">
+                <Image
+                  src="/assets/buying/2.webp"
+                  alt=""
+                  height={1100}
+                  width={1100}
+                  style={{
+                    objectFit: "cover",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                />
+              </div>
               {/* mobile device show */}
               <div className=" hidden md:block absolute top-[50px] left-[100px] h-8 w-8 bg-[#D6EDFF] rounded-full"></div>
-              <div className="   hidden md:block absolute top-[300px] left-[400px] h-10 w-10 bg-[#D6EDFF] rounded-full"></div>
-              <div className="hidden z-50 md:block absolute bottom-10 left-[500px] h-40 w-40 bg-slate-500 rounded-full"></div>
+              <div className="hidden md:block absolute top-[300px] left-[400px] h-10 w-10 bg-[#D6EDFF] rounded-full"></div>
+              <div className="hidden z-50 md:block absolute bottom-10 left-[500px] h-40 w-40 bg-slate-500 rounded-full overflow-hidden">
+                <Image
+                  src="/assets/buying/3.jpg"
+                  alt=""
+                  height={1100}
+                  width={1100}
+                  style={{
+                    objectFit: "cover",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                />
+              </div>
             </div>
           </div>
           <div className=" px-3 md:px-1 md:w-1/2 z-50">
