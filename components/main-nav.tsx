@@ -17,47 +17,54 @@ export function MainNav({
 
   const routesHomeOwner = [
     {
-      href: `/home`,
-      label: "Home",
-      active: pathname === `/home`,
+      href: `/en/list-your-property`,
+      label: "Add Property",
+      active: pathname === `/en/list-your-property`,
     },
     {
-      href: `/home/properties`,
-      label: "Properties",
-      active: pathname === `/home/properties`,
+      href: `/en/blog`,
+      label: "Blog",
+      active: pathname === `/en/blog`,
     },
     {
-      href: `/home/tenants`,
-      label: "Tenants",
-      active: pathname === `/home/tenants`,
+      href: `/en/guides`,
+      label: "Guides",
+      active: pathname === `/en/guides`,
     },
     {
-      href: `/home/landlords`,
-      label: "Landlords",
-      active: pathname === `/home/landlords`,
+      href: `/en/new-projects`,
+      label: "New Projects",
+      active: pathname === `/en/new-projects`,
     },
     {
-      href: `/home/agents`,
-      label: "Agents",
-      active: pathname === `/home/agents`,
-    },
-    {
-      href: `/home/transactions`,
-      label: "Transactions",
-      active: pathname === `/home/transactions`,
-    },
-    {
-      href: `/home/requests`,
-      label: "Requests",
-      active: pathname === `/home/requests`,
-    },
-    {
-      href: `/home/notifications`,
-      label: "Notifications",
-      active: pathname === `/home/notifications`,
+      href: `/en/services`,
+      label: "Services",
+      active: pathname === `/en/services`,
     },
   ];
   const routesRentUser = [
+    {
+      href: `/en/blog`,
+      label: "Blog",
+      active: pathname === `/en/blog`,
+    },
+    {
+      href: `/en/guides`,
+      label: "Guides",
+      active: pathname === `/en/guides`,
+    },
+    {
+      href: `/en/new-projects`,
+      label: "New Projects",
+      active: pathname === `/en/new-projects`,
+    },
+    {
+      href: `/en/services`,
+      label: "Services",
+      active: pathname === `/en/services`,
+    },
+  ];
+  const routesPublickUser = [
     {
       href: `/en/list-your-property`,
       label: "Add Property",
@@ -65,7 +72,7 @@ export function MainNav({
     },
     {
       href: `/en/blog`,
-      label: "Add Property",
+      label: "Blog",
       active: pathname === `/en/blog`,
     },
     {
@@ -120,7 +127,7 @@ export function MainNav({
               {route.label}
             </Link>
           ))
-        : routesRentUser.map((route) => (
+        : routesPublickUser.map((route) => (
             <Link
               key={route.href}
               href={route.href}

@@ -1,8 +1,38 @@
+"use client";
+
+import { usePropertysQuery } from "@/redux/api/propertysApi";
+import { setProperty } from "@/redux/features/property/propertySlice";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Input } from "../ui/input";
 
 const SForm = () => {
+  const router = useRouter();
+
+  const { data, isLoading, refetch } = usePropertysQuery({
+    limit: 10,
+    page: 1,
+  });
+
+  const dispatch = useDispatch();
+
+  const user = useSelector((state: any) => state.user.property);
+
+  useEffect(() => {
+    dispatch(setProperty(data?.property));
+  }, [data, dispatch]);
+
+  const handelSearch = () => {
+    console.log("search", user);
+    // window.location.href = "/search/choices-listings";
+    router.push("/search/choices-listings");
+    refetch();
+  };
+
+  if (isLoading) return <div>loading...</div>;
+
   return (
     <div className="">
       <div className=" flex justify-center ">
@@ -36,11 +66,12 @@ const SForm = () => {
             </div>
           </div>
           <div className="w-full">
-            <Link href="/search/choices-listings">
-              <button className=" py-3 px-9 bg-[#A2DAC7] text-[#384652] font-semibold rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1]focus:ring-opacity-75">
-                Search
-              </button>
-            </Link>
+            <button
+              onClick={handelSearch}
+              className=" py-3 px-9 bg-[#A2DAC7] text-[#384652] font-semibold rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1]focus:ring-opacity-75"
+            >
+              Search
+            </button>
           </div>
         </div>
       </div>

@@ -5,8 +5,6 @@ import { LuBedSingle } from "react-icons/lu";
 import { MdOutlineWindow } from "react-icons/md";
 import { PiMapPin } from "react-icons/pi";
 
-import { Button } from "./ui/button";
-
 const CardInfo = () => {
   return (
     <div className="w-full">
@@ -47,10 +45,13 @@ const CardInfo = () => {
           <span>Street, City, Country Name</span>
         </p>
       </div>
-      <div>
-        <Button className="w-full mt-3" size={"sm"} variant={"default"}>
+      <div className="w-full mt-3 flex justify-between gap-2">
+        <button className="w-1/2  text-white border rounded-lg bg-[#A2DAC7] capitalize hover:bg-[#88dcc0] text-[14px] p-1 transform transition duration-500 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95">
+          Rent Now
+        </button>
+        <button className="w-1/2  border rounded-lg bg-[#E2EEF6] capitalize text-black hover:bg-[#b8d9f0] text-[14px] p-1 transform transition duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95">
           view details
-        </Button>
+        </button>
       </div>
     </div>
   );
