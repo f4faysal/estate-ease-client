@@ -59,14 +59,29 @@ export function MainNav({
   ];
   const routesRentUser = [
     {
-      href: `/home`,
-      label: "Home",
-      active: pathname === `/home`,
+      href: `/en/list-your-property`,
+      label: "Add Property",
+      active: pathname === `/en/list-your-property`,
     },
     {
-      href: `/home/rent`,
-      label: "Rent",
-      active: pathname === `/home/rent`,
+      href: `/en/blog`,
+      label: "Add Property",
+      active: pathname === `/en/blog`,
+    },
+    {
+      href: `/en/guides`,
+      label: "Guides",
+      active: pathname === `/en/guides`,
+    },
+    {
+      href: `/en/new-projects`,
+      label: "New Projects",
+      active: pathname === `/en/new-projects`,
+    },
+    {
+      href: `/en/services`,
+      label: "Services",
+      active: pathname === `/en/services`,
     },
   ];
 
@@ -75,39 +90,50 @@ export function MainNav({
       className={cn("flex items-center space-x-4 lg:space-x-6", className)}
       {...props}
     >
-      {role === "HomeOwner" ? (
-        routesHomeOwner.map((route) => (
-          <Link
-            key={route.href}
-            href={route.href}
-            className={cn(
-              "text-sm font-medium transition-colors hover:text-primary",
-              route.active
-                ? "text-black dark:text-white"
-                : "text-muted-foreground"
-            )}
-          >
-            {route.label}
-          </Link>
-        ))
-      ) : role === "RentUser" ? (
-        routesRentUser.map((route) => (
-          <Link
-            key={route.href}
-            href={route.href}
-            className={cn(
-              "text-sm font-medium transition-colors hover:text-primary",
-              route.active
-                ? "text-black dark:text-white"
-                : "text-muted-foreground"
-            )}
-          >
-            {route.label}
-          </Link>
-        ))
-      ) : (
-        <></>
-      )}
+      {role === "HomeOwner"
+        ? routesHomeOwner.map((route) => (
+            <Link
+              key={route.href}
+              href={route.href}
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                route.active
+                  ? "text-black dark:text-white"
+                  : "text-muted-foreground"
+              )}
+            >
+              {route.label}
+            </Link>
+          ))
+        : role === "RentUser"
+        ? routesRentUser.map((route) => (
+            <Link
+              key={route.href}
+              href={route.href}
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                route.active
+                  ? "text-black dark:text-white"
+                  : "text-muted-foreground"
+              )}
+            >
+              {route.label}
+            </Link>
+          ))
+        : routesRentUser.map((route) => (
+            <Link
+              key={route.href}
+              href={route.href}
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                route.active
+                  ? "text-black dark:text-white"
+                  : "text-muted-foreground"
+              )}
+            >
+              {route.label}
+            </Link>
+          ))}
     </nav>
   );
 }

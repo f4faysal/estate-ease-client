@@ -24,8 +24,8 @@ const NavBar = () => {
               alt="Estate ease logo"
             />
           </Link>
-          <MainNav className="mx-6" />
           <div className="ml-auto flex items-center space-x-4">
+            <MainNav className="mx-6" />
             {/* <ThemeToggle /> */}
 
             {role ? (

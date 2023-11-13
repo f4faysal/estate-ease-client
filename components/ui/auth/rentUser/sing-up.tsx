@@ -19,7 +19,6 @@ import {
 import FormHading from "@/components/ui/form-hading";
 import { Input } from "@/components/ui/input";
 import { bloodGroupsOption, genderOptionObject } from "@/constants/global";
-
 import { useCreateRentUserMutation } from "@/redux/api/usersApi";
 import { userFormSchema } from "@/schemas/rent-user";
 import { storeUserInfo } from "@/services/auth.service";
