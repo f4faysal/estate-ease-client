@@ -1,9 +1,9 @@
-import UserSignUp from "@/components/ui/auth/rentUser/sing-up";
+import SingUpOwner from "@/components/ui/auth/homeOwner/sing-up-owner";
 
 const SingUpHomeOwner = () => {
   return (
     <div>
-      <UserSignUp />
+      <SingUpOwner />
     </div>
   );
 };
