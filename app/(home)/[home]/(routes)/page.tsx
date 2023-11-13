@@ -1,5 +1,6 @@
 import HomeBanner from "@/components/homePage/HomeBanner";
 import HomeBuying from "@/components/homePage/HomeBuying";
+import RentalJureny from "@/components/homePage/RentalJureny";
 import Container from "@/components/ui/container";
 
 const HomePage = () => {
@@ -8,6 +9,7 @@ const HomePage = () => {
       <Container>
         <HomeBanner />
         <HomeBuying />
+        <RentalJureny/>
       </Container>
     </section>
   );
