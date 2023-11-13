@@ -20,7 +20,7 @@ import FormHading from "@/components/ui/form-hading";
 import { Input } from "@/components/ui/input";
 import { bloodGroupsOption, genderOptionObject } from "@/constants/global";
 import { useCreateHomeOwnerMutation } from "@/redux/api/usersApi";
-import { userFormSchema } from "@/schemas/rent-user";
+import { homeOwnerFormSchema } from "@/schemas/home-owner";
 import { storeUserInfo } from "@/services/auth.service";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -29,12 +29,12 @@ const SingUpOwner = () => {
   const router = useRouter();
   const [createHomeOwnerMutation] = useCreateHomeOwnerMutation();
 
-  const form = useForm<z.infer<typeof userFormSchema>>({
-    resolver: zodResolver(userFormSchema),
+  const form = useForm<z.infer<typeof homeOwnerFormSchema>>({
+    resolver: zodResolver(homeOwnerFormSchema),
     defaultValues: {},
   });
 
-  const onSubmit = async (values: z.infer<typeof userFormSchema>) => {
+  const onSubmit = async (values: z.infer<typeof homeOwnerFormSchema>) => {
     try {
       console.log(values);
       const res: any = await createHomeOwnerMutation(values);
@@ -43,7 +43,7 @@ const SingUpOwner = () => {
         form.reset();
         router.push("/");
         storeUserInfo({ accessToken: res?.data?.accessToken });
-        toast.success("rentUser created successfully");
+        toast.success("homeOwner created successfully");
       } else {
         toast(res?.error);
       }
@@ -73,7 +73,7 @@ const SingUpOwner = () => {
                 <div className="">
                   <FormField
                     control={form.control}
-                    name="rentUser.name.firstName"
+                    name="homeOwner.name.firstName"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>First Name</FormLabel>
@@ -92,7 +92,7 @@ const SingUpOwner = () => {
                 <div className="">
                   <FormField
                     control={form.control}
-                    name="rentUser.name.middleName"
+                    name="homeOwner.name.middleName"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Middle Name</FormLabel>
@@ -111,7 +111,7 @@ const SingUpOwner = () => {
                 <div className=".">
                   <FormField
                     control={form.control}
-                    name="rentUser.name.lastName"
+                    name="homeOwner.name.lastName"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Last Name</FormLabel>
@@ -132,7 +132,7 @@ const SingUpOwner = () => {
                 <div className=".">
                   <FormField
                     control={form.control}
-                    name="rentUser.email"
+                    name="homeOwner.email"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Email</FormLabel>
@@ -152,7 +152,7 @@ const SingUpOwner = () => {
                 <div className=".">
                   <FormField
                     control={form.control}
-                    name="rentUser.dateOfBirth"
+                    name="homeOwner.dateOfBirth"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Det of Birth</FormLabel>
@@ -174,7 +174,7 @@ const SingUpOwner = () => {
                 <div className=".">
                   <FormField
                     control={form.control}
-                    name="rentUser.contactNo"
+                    name="homeOwner.contactNo"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Contact No</FormLabel>
@@ -194,7 +194,7 @@ const SingUpOwner = () => {
                 <div className=".">
                   <FormField
                     control={form.control}
-                    name="rentUser.emergencyContactNo"
+                    name="homeOwner.emergencyContactNo"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Emergency Contact No</FormLabel>
@@ -220,7 +220,7 @@ const SingUpOwner = () => {
                 <div className="">
                   <FormField
                     control={form.control}
-                    name="rentUser.gender"
+                    name="homeOwner.gender"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Gender</FormLabel>
@@ -239,7 +239,7 @@ const SingUpOwner = () => {
                 <div className="">
                   <FormField
                     control={form.control}
-                    name="rentUser.bloodGroup"
+                    name="homeOwner.bloodGroup"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Blood Group</FormLabel>
@@ -261,7 +261,7 @@ const SingUpOwner = () => {
                 <div className=".">
                   <FormField
                     control={form.control}
-                    name="rentUser.presentAddress"
+                    name="homeOwner.presentAddress"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Present Address</FormLabel>
@@ -280,7 +280,7 @@ const SingUpOwner = () => {
                 <div className=".">
                   <FormField
                     control={form.control}
-                    name="rentUser.permanentAddress"
+                    name="homeOwner.permanentAddress"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Permanent Address</FormLabel>
@@ -304,7 +304,7 @@ const SingUpOwner = () => {
               <div className="mb-4">
                 <FormField
                   control={form.control}
-                  name="rentUser.profileImage"
+                  name="homeOwner.profileImage"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Profile image</FormLabel>
