@@ -41,6 +41,11 @@ export function MainNav({
       label: "Services",
       active: pathname === `/en/services`,
     },
+    {
+      href: `/en/dashboard`,
+      label: "Dashboard",
+      active: pathname === `/en/dashboard`,
+    },
   ];
   const routesRentUser = [
     {

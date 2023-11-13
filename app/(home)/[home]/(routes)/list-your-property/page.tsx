@@ -1,27 +1,40 @@
 "use client";
 
+import UseModal from "@/components/reusable-ui/admin-modal";
 import Container from "@/components/ui/container";
+import { openModal } from "@/redux/features/modal/modalSlice";
 import { getUserInfo } from "@/services/auth.service";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 
 const ListYourProperty = () => {
   const { role }: any = getUserInfo();
 
   const router = useRouter();
 
+  const dispatch = useDispatch();
+
+  const handleOpenModal = () => {
+    dispatch(openModal());
+  };
+
   const handelGetStarted = () => {
     if (role === "HomeOwner") {
-      toast.success("Welcome Home Owner");
+      toast.success("Welcome Home Owner !");
+      router.push("/en/dashboard");
     } else {
-      router.push("/sign-up-home-owner");
+      handleOpenModal();
     }
   };
 
   return (
     <div>
+      <UseModal title="hello" description="hi">
+        hello
+      </UseModal>
       {/* hero rent */}
       <div className="bg-hero-pattern bg-transparent h-[500px] bg-cover bg-no-repeat flex justify-center items-center">
         <Container>
