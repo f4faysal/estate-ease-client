@@ -1,10 +1,12 @@
 "use client";
 
 import UseModal from "@/components/reusable-ui/admin-modal";
+import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import { openModal } from "@/redux/features/modal/modalSlice";
 import { getUserInfo } from "@/services/auth.service";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import toast from "react-hot-toast";
@@ -32,8 +34,18 @@ const ListYourProperty = () => {
 
   return (
     <div>
-      <UseModal title="hello" description="hi">
-        hello
+      <UseModal
+        title="Please first login as Home Owner"
+        description="You are not logged in as Home Owner. Please login as Home Owner to continue."
+      >
+        <div className="pt-6 space-x-2 flex items-center justify-end w-full">
+          <Link href="/sign-in">
+            <Button variant="outline">Sign in</Button>
+          </Link>
+          <Link href="/sign-up-home-owner">
+            <Button variant="default">Sing up as Home Owner</Button>
+          </Link>
+        </div>
       </UseModal>
       {/* hero rent */}
       <div className="bg-hero-pattern bg-transparent h-[500px] bg-cover bg-no-repeat flex justify-center items-center">
@@ -44,7 +56,7 @@ const ListYourProperty = () => {
                 Rent or Sell <br /> Property Online
               </h1>
               <p className="text-base ">
-                Looking to sell property online or are you in search of tenants?{" "}
+                Looking to sell property online or are you in search of tenants?
                 <br />
                 Do it with ease with the largest real estate marketplace in
                 Bangladesh. Start your journey now!
