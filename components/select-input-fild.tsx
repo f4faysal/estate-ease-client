@@ -6,6 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 interface SelectInputFieldProps {
   field: any;
@@ -29,11 +30,13 @@ const SelectInputField: React.FC<SelectInputFieldProps> = ({
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          {mapData.map((item, i) => (
-            <SelectItem key={i} value={item.value}>
-              {item.label}
-            </SelectItem>
-          ))}
+          <ScrollArea className="max-h-40">
+            {mapData.map((item, i) => (
+              <SelectItem key={i} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
+          </ScrollArea>
         </SelectGroup>
       </SelectContent>
     </Select>

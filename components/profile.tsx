@@ -152,9 +152,9 @@ const Profile = () => {
             <span>API</span>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={handelLogOut}>
             <LogOut className="mr-2 h-4 w-4" />
-            <span onClick={handelLogOut}>Log out</span>
+            <span>Log out</span>
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>

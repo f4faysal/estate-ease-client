@@ -56,11 +56,13 @@ const SingUpOwner = () => {
     <div className="w-10/12 mx-auto bg-[#f8fafc] py-10 flex items-center justify-center">
       <div className="bg-white shadow-lg border rounded-md px-4 py-8 grid grid-flow-row  auto-rows-max gap-2">
         <div className="h-20 flex flex-col justify-center items-center gap-2">
-          <h1 className="text-2xl font-bold text-center">Sign up For Sell</h1>
+          <h1 className="text-2xl font-bold text-center">
+            Sign up for Home-owner
+          </h1>
 
           <p className="text-xs text-slate-400">
             Please fill up the form to create a new account rent or sell your
-            property.
+            property. 
           </p>
         </div>
 

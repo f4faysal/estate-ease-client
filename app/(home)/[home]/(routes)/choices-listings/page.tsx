@@ -16,7 +16,7 @@ const ChoicesListings = () => {
       </div>
       <Container>
         <div className="-mt-28 px-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, i) => (
+          {[1, 1, 1, 1, 1, 1].map((item, i) => (
             <CardInfo key={i} />
           ))}
         </div>
