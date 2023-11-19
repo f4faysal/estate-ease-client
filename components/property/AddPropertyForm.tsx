@@ -25,6 +25,7 @@ import {
 } from "@/constants/global";
 import { useCreateHomeOwnerMutation } from "@/redux/api/usersApi";
 import { homeSchema } from "@/schemas/home-schema";
+import ImageUpload from "../image-upload";
 import SelectInputField from "../select-input-fild";
 import { Checkbox } from "../ui/checkbox";
 import { Textarea } from "../ui/textarea";
@@ -42,15 +43,6 @@ const AddPropertyForm = () => {
     console.log(values);
     toast.success("Property Created Successfully");
     try {
-      //   const res: any = await createHomeOwnerMutation(values);
-      //   console.log(res);
-      //   if (res?.data?.accessToken) {
-      //     form.reset();
-      //     router.push("/");
-      //     storeUserInfo({ accessToken: res?.data?.accessToken });
-      //   } else {
-      //     toast(res?.error);
-      //   }
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
@@ -64,7 +56,37 @@ const AddPropertyForm = () => {
             <form onSubmit={form.handleSubmit(onSubmit)}>
               {/* Personal Info */}
               <div className="w-full">
-                <FormHading title="Personal Information" />
+                <FormHading title="Property Information" />
+                <div className="mb-3">
+                  <FormField
+                    control={form.control}
+                    name="home.images"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          Add images <span className="text-red-500">min 5</span>{" "}
+                        </FormLabel>
+                        <FormControl>
+                          <ImageUpload
+                            value={field?.value?.map((item) => item?.url)}
+                            // disabled={loading}
+                            onChange={(url) =>
+                              field.onChange([...field?.value, { url }])
+                            }
+                            onRemove={(url) =>
+                              field.onChange([
+                                ...field?.value?.filter(
+                                  (current) => current?.url !== url
+                                ),
+                              ])
+                            }
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
                 <div className=" w-full grid grid-cols-1 md:grid-cols-4 gap-3">
                   <div className="">
                     <FormField

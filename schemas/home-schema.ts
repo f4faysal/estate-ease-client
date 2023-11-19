@@ -9,7 +9,7 @@ export const homeData = z.object({
   offerPrice: z.string(),
   address: z.string(),
   description: z.string(),
-  images: z.array(z.string()).optional(),
+  images: z.object({ url: z.string() }).array(),
   homeType: z.string(),
   residential: z.string(),
   location: z.string(),
