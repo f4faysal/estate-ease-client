@@ -325,7 +325,7 @@ const AddPropertyForm = () => {
                             <FormControl>
                               <SelectInputField
                                 field={field}
-                                placeholder="Total Window"
+                                placeholder="Home Size Unit"
                                 mapData={sizePerUnitArray}
                               />
                             </FormControl>
