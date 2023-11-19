@@ -43,6 +43,15 @@ const AddPropertyForm = () => {
     console.log(values);
     toast.success("Property Created Successfully");
     try {
+      //   const res: any = await createHomeOwnerMutation(values);
+      //   console.log(res);
+      //   if (res?.data?.accessToken) {
+      //     form.reset();
+      //     router.push("/");
+      //     storeUserInfo({ accessToken: res?.data?.accessToken });
+      //   } else {
+      //     toast(res?.error);
+      //   }
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
