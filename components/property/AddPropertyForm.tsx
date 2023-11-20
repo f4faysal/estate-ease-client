@@ -25,6 +25,7 @@ import {
 } from "@/constants/global";
 import { useCreatePropertyMutation } from "@/redux/api/propertysApi";
 import { homeSchema } from "@/schemas/home-schema";
+import { FilePlus } from "lucide-react";
 import ImageUpload from "../image-upload";
 import SelectInputField from "../select-input-fild";
 import { Checkbox } from "../ui/checkbox";
@@ -538,119 +539,9 @@ const AddPropertyForm = () => {
                   </div>
                 </div>
               </div>
-              {/* Basic Info */}
-              {/* <div className=" mt-3 ">
-                <FormHading title="Basic Information" />
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="">
-                    <FormField
-                      control={form.control}
-                      name="homeOwner.gender"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Gender</FormLabel>
-                          <FormControl>
-                            <SelectInputField
-                              field={field}
-                              placeholder="Select a gender"
-                              mapData={bloodGroupsOption}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="">
-                    <FormField
-                      control={form.control}
-                      name="homeOwner.bloodGroup"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Blood Group</FormLabel>
-                          <FormControl>
-                            <SelectInputField
-                              field={field}
-                              placeholder="Select a Blood Group"
-                              mapData={residentialArray}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
-              </div> */}
-              {/* User info */}
-              {/* <div className=" mt-3 ">
-                <FormHading title="User Information" />
-                <div className="mb-4">
-                  <FormField
-                    control={form.control}
-                    name="homeOwner.profileImage"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Profile image</FormLabel>
-                        <FormControl>
-                          <ImageUpload
-                            value={field.value ? [field.value] : []}
-                            // disabled={loading}
-                            onChange={(url) => field.onChange(url)}
-                            onRemove={() => field.onChange("")}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className=".">
-                    <FormField
-                      control={form.control}
-                      name="password"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Password</FormLabel>
-                          <FormControl>
-                            <Input
-                              // disabled={loading}
-                              placeholder="Password"
-                              {...field}
-                              type="password"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className=".">
-                    <FormField
-                      control={form.control}
-                      name="nidNumber"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>National Identity Card No</FormLabel>
-                          <FormControl>
-                            <Input
-                              // disabled={loading}
-                              placeholder="National Identity Card No"
-                              type="number"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
-              </div> */}
-
-              <div className="pt-6 space-x-2 flex  justify-end w-full">
-                <Button className="" type="submit">
+              <div className="py-6  space-x-2 flex  justify-end w-full">
+                <Button className=" md:px-24 gap-2" type="submit">
+                  <FilePlus />
                   Create
                 </Button>
               </div>
