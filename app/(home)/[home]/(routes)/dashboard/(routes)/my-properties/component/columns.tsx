@@ -32,19 +32,19 @@ export const columns: ColumnDef<AdminColumn>[] = [
   //   },
 
   {
-    accessorKey: "homeStatus",
+    accessorKey: "status",
     header: ({ column }) => <div className="font-bold">Status</div>,
     cell: ({ row }: any) => (
       <div>
-        {row.original.homeStatus === "available" ? (
+        {row.original.status === "available" ? (
           <div className="text-green-600">Available</div>
-        ) : row.original.homeStatus === "rentedOut" ? (
+        ) : row.original.status === "rentedOut" ? (
           <div className="text-red-600">Rented Out</div>
-        ) : row.original.homeStatus === "rentedOutApproval" ? (
+        ) : row.original.status === "rentedOutApproval" ? (
           <div className="text-yellow-600">Rented Out Approval</div>
-        ) : row.original.homeStatus === "pending" ? (
+        ) : row.original.status === "pending" ? (
           <div className="text-yellow-600">Pending</div>
-        ) : row.original.homeStatus === "unavailableApproval" ? (
+        ) : row.original.status === "unavailableApproval" ? (
           <div className="text-yellow-600">Unavailable Approval</div>
         ) : (
           <div className="text-red-600">Unavailable</div>
@@ -53,24 +53,24 @@ export const columns: ColumnDef<AdminColumn>[] = [
     ),
   },
   {
-    accessorKey: "home.title",
+    accessorKey: "title",
     header: "Title",
-    cell: ({ row }: any) => <p>{row.original.home.title.slice(0, 20)} ..</p>,
+    cell: ({ row }: any) => <p>{row.original?.title.slice(0, 50)} ..</p>,
   },
   {
-    accessorKey: "home.price",
+    accessorKey: "price",
     header: "Price",
   },
   {
-    accessorKey: "home.offerPrice",
+    accessorKey: "offerPrice",
     header: "Offer Price",
   },
   {
-    accessorKey: "home.residential",
+    accessorKey: "residential",
     header: "Residential",
   },
   {
-    accessorKey: "home.homeSize",
+    accessorKey: "homeSize",
     header: "Size",
   },
 

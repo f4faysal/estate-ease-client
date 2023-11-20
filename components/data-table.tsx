@@ -14,7 +14,6 @@ import {
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -23,6 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Input } from "./ui/input";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -64,6 +64,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        {/* <Input placeholder="Search" className="max-w-sm" /> */}
       </div>
       <div className="rounded-md border">
         <Table>

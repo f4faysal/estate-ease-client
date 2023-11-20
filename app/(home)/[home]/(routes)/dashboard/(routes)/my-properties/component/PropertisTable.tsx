@@ -9,15 +9,23 @@ const PropertisTable = () => {
 
   const { data, isLoading } = usePropertysQuery({});
 
-  const properties: any = data?.property;
+  const { property, meta }: any = data || [];
 
-  console.log("properties", properties);
+  const properties = property?.map((item: any) => ({
+    status: item.homeStatus,
+    title: item.home.title,
+    price: item.home.price,
+    offerPrice: item.home.offerPrice,
+    residential: item.home.residential,
+    homeSize: item.home.homeSize,
+    createdAt: item.createdAt,
+  }));
 
   if (isLoading) return <div>loading...</div>;
 
   return (
     <div>
-      <DataTable searchKey="name" columns={columns} data={properties || []} />
+      <DataTable searchKey="title" columns={columns} data={properties || []} />
     </div>
   );
 };
