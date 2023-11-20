@@ -2,6 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
+import { ArrowUpDown } from "lucide-react";
 import { CellAction } from "./cell-action";
 
 export type AdminColumn = {
@@ -63,7 +64,15 @@ export const columns: ColumnDef<AdminColumn>[] = [
   },
   {
     accessorKey: "offerPrice",
-    header: "Offer Price",
+    header: ({ column }) => (
+      <div
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="flex items-center cursor-pointer"
+      >
+        Offer Price
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </div>
+    ),
   },
   {
     accessorKey: "residential",
@@ -76,7 +85,15 @@ export const columns: ColumnDef<AdminColumn>[] = [
 
   {
     accessorKey: "createdAt",
-    header: "Created Date",
+    header: ({ column }) => (
+      <div
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="flex font-bold items-center cursor-pointer"
+      >
+        Created At
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </div>
+    ),
     cell: ({ row }) => (
       <div>
         {/* {new Date(row.original.createdAt).toLocaleDateString()} */}
