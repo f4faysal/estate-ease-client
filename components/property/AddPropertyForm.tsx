@@ -42,6 +42,8 @@ const AddPropertyForm = () => {
   const onSubmit = async (values: z.infer<typeof homeSchema>) => {
     console.log(values);
     toast.success("Property Created Successfully");
+    toast("Property Created Successfully");
+
     try {
       //   const res: any = await createHomeOwnerMutation(values);
       //   console.log(res);
