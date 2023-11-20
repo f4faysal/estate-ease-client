@@ -1,7 +1,14 @@
+"use client";
+
 import CardInfo from "@/components/card-info";
 import Container from "@/components/ui/container";
+import { usePropertysQuery } from "@/redux/api/propertysApi";
 
 const ChoicesListings = () => {
+  const { data, isLoading } = usePropertysQuery({});
+
+  const { property, meta }: any = data || [];
+
   return (
     <div className="">
       <div className=" bg-[#EBF6FF] flex flex-col pt-12 items-center h-[300px] rounded-lg ">
@@ -15,9 +22,9 @@ const ChoicesListings = () => {
         </p>
       </div>
       <Container>
-        <div className="-mt-28 px-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {[1, 1, 1, 1, 1, 1].map((item, i) => (
-            <CardInfo key={i} />
+        <div className="-mt-28 px-3 mb-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {property?.map((propertys: any, i: number) => (
+            <CardInfo key={i} propertys={propertys} />
           ))}
         </div>
       </Container>

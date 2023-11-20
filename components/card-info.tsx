@@ -5,7 +5,8 @@ import { LuBedSingle } from "react-icons/lu";
 import { MdOutlineWindow } from "react-icons/md";
 import { PiMapPin } from "react-icons/pi";
 
-const CardInfo = () => {
+const CardInfo = ({ propertys }: any) => {
+  console.log(propertys);
   return (
     <div className="w-full">
       <div className="w-full h-[240px]">
@@ -19,12 +20,12 @@ const CardInfo = () => {
             height: "100%",
             width: "100%",
           }}
-          src="/demo.png"
+          src={propertys?.home?.images[0]?.url}
           alt=""
         />
       </div>
       <div className="mt-3 flex justify-between items-center">
-        <div className="text-xl font-bold ">$320,00</div>
+        <div className="text-xl font-bold ">${propertys?.home?.price}</div>
 
         <p className="text-sm font-semibold flex items-baseline gap-1 ">
           <GiRoundStar />
@@ -34,15 +35,20 @@ const CardInfo = () => {
         </p>
       </div>
       <div className="flex flex-col gap-1">
-        <h2 className="text-base font-semibold">Beautiful House for Sale</h2>
+        <h2 className="text-base font-semibold capitalize">
+          {propertys?.home?.title}
+        </h2>
         <p className="text-sm flex gap-1 items-center">
-          <LuBedSingle /> <span>4</span> | <LiaBathSolid /> <span>6</span> |
+          <LuBedSingle />{" "}
+          <span>{propertys?.home?.homeSizeDetails.numberOfBathrooms}</span> |{" "}
+          <LiaBathSolid />{" "}
+          <span>{propertys?.home?.homeSizeDetails.numberOfBathrooms}</span> |
           <MdOutlineWindow />
-          <span>1500 sqft</span>
+          <span>{`${propertys?.home?.homeSizeDetails.totalSQFT} ${propertys?.home?.homeSizeDetails.sizePerUnit}`}</span>
         </p>
         <p className="text-sm flex gap-1 items-center">
           <PiMapPin />
-          <span>Street, City, Country Name</span>
+          <span>{propertys?.home?.address}</span>
         </p>
       </div>
       <div className="w-full mt-3 flex justify-between gap-2">
