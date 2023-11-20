@@ -11,7 +11,10 @@ const PropertisTable = () => {
 
   const { property, meta }: any = data || [];
 
+  console.log("property", property);
+
   const properties = property?.map((item: any) => ({
+    id: item.id,
     status: item.homeStatus,
     title: item.home.title,
     price: item.home.price,
