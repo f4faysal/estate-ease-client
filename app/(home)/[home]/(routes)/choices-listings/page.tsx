@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/app/loading";
 import CardInfo from "@/components/card-info";
 import Container from "@/components/ui/container";
 import { usePropertysQuery } from "@/redux/api/propertysApi";
@@ -8,6 +9,8 @@ const ChoicesListings = () => {
   const { data, isLoading } = usePropertysQuery({});
 
   const { property, meta }: any = data || [];
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="">

@@ -1,4 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { GiRoundStar } from "react-icons/gi";
 import { LiaBathSolid } from "react-icons/lia";
 import { LuBedSingle } from "react-icons/lu";
@@ -6,7 +9,12 @@ import { MdOutlineWindow } from "react-icons/md";
 import { PiMapPin } from "react-icons/pi";
 
 const CardInfo = ({ propertys }: any) => {
-  console.log(propertys);
+  const router = useRouter();
+
+  const handelRentNow = () => {
+    toast.success("Rent Now");
+  };
+
   return (
     <div className="w-full">
       <div className="w-full h-[240px]">
@@ -51,13 +59,18 @@ const CardInfo = ({ propertys }: any) => {
           <span>{propertys?.home?.address}</span>
         </p>
       </div>
-      <div className="w-full mt-3 flex justify-between gap-2">
+      <div
+        onClick={handelRentNow}
+        className="w-full mt-3 flex justify-between gap-2"
+      >
         <button className="w-1/2  text-white border rounded-lg bg-[#A2DAC7] capitalize hover:bg-[#88dcc0] text-[14px] p-1 transform transition duration-500 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95">
           Rent Now
         </button>
-        <button className="w-1/2  border rounded-lg bg-[#E2EEF6] capitalize text-black hover:bg-[#b8d9f0] text-[14px] p-1 transform transition duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95">
-          view details
-        </button>
+        <Link href={`/search/choices-listings/${propertys?.id}`}>
+          <button className="w-1/2  border rounded-lg bg-[#E2EEF6] capitalize text-black hover:bg-[#b8d9f0] text-[14px] p-1 transform transition duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95">
+            view details
+          </button>
+        </Link>
       </div>
     </div>
   );
