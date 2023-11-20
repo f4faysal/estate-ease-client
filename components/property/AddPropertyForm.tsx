@@ -23,7 +23,7 @@ import {
   residentialArray,
   sizePerUnitArray,
 } from "@/constants/global";
-import { useCreateHomeOwnerMutation } from "@/redux/api/usersApi";
+import { useCreatePropertyMutation } from "@/redux/api/propertysApi";
 import { homeSchema } from "@/schemas/home-schema";
 import ImageUpload from "../image-upload";
 import SelectInputField from "../select-input-fild";
@@ -32,7 +32,8 @@ import { Textarea } from "../ui/textarea";
 
 const AddPropertyForm = () => {
   const router = useRouter();
-  const [createHomeOwnerMutation] = useCreateHomeOwnerMutation();
+
+  const [createProperty] = useCreatePropertyMutation();
 
   const form = useForm<z.infer<typeof homeSchema>>({
     resolver: zodResolver(homeSchema),
@@ -40,23 +41,17 @@ const AddPropertyForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof homeSchema>) => {
-    console.log(values);
-    toast.success("Property Created Successfully");
-    toast("Property Created Successfully");
-
     try {
-      //   const res: any = await createHomeOwnerMutation(values);
-      //   console.log(res);
-      //   if (res?.data?.accessToken) {
-      //     form.reset();
-      //     router.push("/");
-      //     storeUserInfo({ accessToken: res?.data?.accessToken });
-      //   } else {
-      //     toast(res?.error);
-      //   }
+      const res: any = await createProperty(values);
+      if (res.data) {
+        toast.success("Property Created Successfully");
+        form.reset();
+        router.push("/en/dashboard/my-properties");
+      } else {
+        toast(res?.error);
+      }
     } catch (error) {
       toast.error("Something went wrong");
-    } finally {
     }
   };
   return (
@@ -79,15 +74,15 @@ const AddPropertyForm = () => {
                         </FormLabel>
                         <FormControl>
                           <ImageUpload
-                            value={field?.value?.map((item) => item?.url)}
+                            value={field.value?.map((image) => image.url)}
                             // disabled={loading}
                             onChange={(url) =>
-                              field.onChange([...field?.value, { url }])
+                              field.onChange([...(field.value || []), { url }])
                             }
                             onRemove={(url) =>
                               field.onChange([
-                                ...field?.value?.filter(
-                                  (current) => current?.url !== url
+                                ...field.value.filter(
+                                  (current) => current.url !== url
                                 ),
                               ])
                             }
@@ -385,10 +380,6 @@ const AddPropertyForm = () => {
                   </div>
                   {/* homeSizeDetails */}
                   {/*features  */}
-
-                  {/*
-                   
-                   */}
                   <div>
                     <div className=" grid grid-cols-3 gap-2 h-full items-center">
                       <FormField

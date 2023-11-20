@@ -30,13 +30,18 @@ export const propertyApi = baseApi.injectEndpoints({
     }),
     // createProperty
     createProperty: build.mutation({
-      query: () => ({
+      query: (data) => ({
         url: `${Property_URL}`,
         method: "POST",
+        data: data,
       }),
       invalidatesTags: [tagTypes.property],
     }),
   }),
 });
 
-export const { usePropertysQuery } = propertyApi;
+export const {
+  usePropertysQuery,
+  usePropertyQuery,
+  useCreatePropertyMutation,
+} = propertyApi;
