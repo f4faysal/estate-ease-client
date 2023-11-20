@@ -3,12 +3,13 @@ import Container from "@/components/ui/container";
 import { Heading } from "@/components/ui/heading";
 import { Plus } from "lucide-react";
 import Link from "next/link";
+import PropertisTable from "./component/PropertisTable";
 
 const MyProperties = () => {
   return (
     <div className="h-screen">
       <Container>
-        <div className="flex items-center justify-between">
+        <div className="py-2 flex items-center justify-between">
           <Heading
             title="My Properties"
             description="Add and manage your properties here. You can add as many properties as you want."
@@ -27,6 +28,9 @@ const MyProperties = () => {
               <Plus className="mr-2 h-4 w-4" /> Add Property
             </Button>
           </Link>
+        </div>
+        <div>
+          <PropertisTable />
         </div>
       </Container>
     </div>
