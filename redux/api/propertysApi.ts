@@ -5,7 +5,7 @@ const Property_URL = "/home-info";
 
 export const propertyApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    // homeOwners
+    // getPropertys
     propertys: build.query({
       query: ({}) => ({
         url: `${Property_URL}`,
@@ -18,24 +18,23 @@ export const propertyApi = baseApi.injectEndpoints({
         };
       },
 
-      providesTags: [tagTypes.homeOwners],
+      providesTags: [tagTypes.property],
     }),
-    // homeOwner
-    homeOwner: build.query({
-      query: (id) => ({
+    // getProperty
+    property: build.query({
+      query: ({ id }) => ({
         url: `${Property_URL}/${id}`,
         method: "GET",
       }),
-      providesTags: [tagTypes.homeOwners],
+      providesTags: [tagTypes.property],
     }),
-    // update homeOwners
-    updatehomeOwner: build.mutation({
-      query: (paylod) => ({
-        url: `${Property_URL}/${paylod.id}`,
-        method: "PATCH",
-        data: paylod.data,
+    // createProperty
+    createProperty: build.mutation({
+      query: () => ({
+        url: `${Property_URL}`,
+        method: "POST",
       }),
-      invalidatesTags: [tagTypes.homeOwners],
+      invalidatesTags: [tagTypes.property],
     }),
   }),
 });

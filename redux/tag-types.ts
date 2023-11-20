@@ -3,11 +3,12 @@ export enum tagTypes {
   admin = "admin",
   rentUsers = "rentUsers",
   homeOwners = "homeOwners",
+  property = "property",
 }
 
 export const tagTypesList = [
   tagTypes.user,
   tagTypes.admin,
   tagTypes.rentUsers,
-  tagTypes.homeOwners,
+  tagTypes.property,
 ];
