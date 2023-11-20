@@ -66,10 +66,11 @@ const CardInfo = ({ propertys }: any) => {
         <button className="w-1/2  text-white border rounded-lg bg-[#A2DAC7] capitalize hover:bg-[#88dcc0] text-[14px] p-1 transform transition duration-500 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95">
           Rent Now
         </button>
-        <Link href={`/search/choices-listings/${propertys?.id}`}>
-          <button className="w-1/2  border rounded-lg bg-[#E2EEF6] capitalize text-black hover:bg-[#b8d9f0] text-[14px] p-1 transform transition duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95">
-            view details
-          </button>
+        <Link
+          className="w-1/2 text-center border rounded-lg bg-[#E2EEF6] capitalize text-black hover:bg-[#b8d9f0] text-[14px] p-1 transform transition duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95"
+          href={`/search/choices-listings/${propertys?.id}`}
+        >
+          <p>view details</p>
         </Link>
       </div>
     </div>
