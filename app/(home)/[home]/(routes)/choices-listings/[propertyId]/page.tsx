@@ -14,6 +14,8 @@ interface Props {
 const PropertyDetails = ({ params }: Props) => {
   const { data, isLoading } = usePropertyQuery(params.propertyId);
 
+  console.log(data);
+
   if (isLoading) return <Loading />;
   return (
     <div>
