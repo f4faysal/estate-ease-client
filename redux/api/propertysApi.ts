@@ -28,6 +28,13 @@ export const propertyApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.property],
     }),
+    myPropertys: build.query({
+      query: ({}) => ({
+        url: `${Property_URL}/my-propertys`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.property],
+    }),
     // createProperty
     createProperty: build.mutation({
       query: (data) => ({
