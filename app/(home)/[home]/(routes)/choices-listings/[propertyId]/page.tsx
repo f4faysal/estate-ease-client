@@ -23,14 +23,14 @@ const PropertyDetails = ({ params }: Props) => {
 
       <Container>
         <div className="grid grid-cols-4 grid-rows-2 gap-4">
-          <div className="col-span-2 row-span-2">1</div>
-          <div className="">2</div>
-          <div className="">3</div>
-          <div className="">4</div>
-          <div className="">5</div>
+          <div className="col-span-2 row-span-2 h-80 border">1</div>
+          <div className="border">2</div>
+          <div className="border">3</div>
+          <div className="border">4</div>
+          <div className="border">5</div>
         </div>
 
-        <h1>{params.propertyId}</h1>
+        <h1>{data?.home.title}</h1>
       </Container>
     </div>
   );
