@@ -22,12 +22,13 @@ export const propertyApi = baseApi.injectEndpoints({
     }),
     // getProperty
     property: build.query({
-      query: ({ id }) => ({
+      query: (id) => ({
         url: `${Property_URL}/${id}`,
         method: "GET",
       }),
       providesTags: [tagTypes.property],
     }),
+    // getMyPropertys
     myPropertys: build.query({
       query: ({}) => ({
         url: `${Property_URL}/my-propertys`,
