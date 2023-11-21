@@ -1,6 +1,8 @@
 "use client";
 
+import Loading from "@/app/loading";
 import Container from "@/components/ui/container";
+import { usePropertyQuery } from "@/redux/api/propertysApi";
 
 interface Props {
   params: {
@@ -10,6 +12,9 @@ interface Props {
 }
 
 const PropertyDetails = ({ params }: Props) => {
+  const { data, isLoading } = usePropertyQuery(params.propertyId);
+
+  if (isLoading) return <Loading />;
   return (
     <div>
       <div className="w-full h-[300px] bg-[#EBF6FF] rounded-lg"></div>
