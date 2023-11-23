@@ -1,14 +1,14 @@
 "use client";
 
-import NextImage from "next/image";
 import { Tab } from "@headlessui/react";
+import NextImage from "next/image";
 
-import { Image } from "@/types";
+// import { Image } from "@/types";
 
 import GalleryTab from "./gallery-tab";
 
 interface GalleryProps {
-  images: Image[];
+  images: any[];
 }
 
 const Gallery: React.FC<GalleryProps> = ({ images = [] }) => {
