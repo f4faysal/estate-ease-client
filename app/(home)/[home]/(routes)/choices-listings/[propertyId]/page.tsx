@@ -1,6 +1,7 @@
 "use client";
 
 import Loading from "@/app/loading";
+import Gallery from "@/components/gallery/ingex";
 import Container from "@/components/ui/container";
 import { usePropertyQuery } from "@/redux/api/propertysApi";
 
@@ -29,6 +30,8 @@ const PropertyDetails = ({ params }: Props) => {
           <div className="border">4</div>
           <div className="border">5</div>
         </div>
+
+        <Gallery images={data?.home.images} />
 
         <h1>{data?.home.title}</h1>
       </Container>
