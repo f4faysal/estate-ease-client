@@ -9,7 +9,7 @@ const HomePage = () => {
       <Container>
         <HomeBanner />
         <HomeBuying />
-        <RentalJureny/>
+        <RentalJureny />
       </Container>
     </section>
   );
