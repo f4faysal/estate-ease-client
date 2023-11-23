@@ -24,22 +24,7 @@ const PropertyDetails = ({ params }: Props) => {
 
       <Container>
         <div className="px-4 py-10 sm:px-6 lg:px-8 -mt-[300px]">
-          <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
-            <Gallery images={data?.home.images} />
-
-            {/* <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-              <Info data={product} />
-            </div> */}
-          </div>
-          <hr className="my-10" />
-          {/* <ProductList title="Related Items" items={suggestedProducts} /> */}
-        </div>
-        <div className="grid grid-cols-4 grid-rows-2 gap-4">
-          <div className="col-span-2 row-span-2 h-80 border">1</div>
-          <div className="border">2</div>
-          <div className="border">3</div>
-          <div className="border">4</div>
-          <div className="border">5</div>
+          <Gallery images={data?.home.images} />
         </div>
 
         <h1>{data?.home.title}</h1>
