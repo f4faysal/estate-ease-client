@@ -2,6 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { AlertTriangle, CheckCircleIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import Container from "./ui/container";
 
 const bannerVariants = cva(
   "border text-center p-4 text-sm flex items-center w-full",
@@ -32,8 +33,12 @@ export const Banner = ({ label, variant }: BannerProps) => {
 
   return (
     <div className={cn(bannerVariants({ variant }))}>
-      <Icon className="h-4 w-4 mr-2" />
-      {label}
+      <Container>
+        <div className="flex gap-2">
+          <Icon className="h-4 w-4 mr-2" />
+          {label}
+        </div>
+      </Container>
     </div>
   );
 };
