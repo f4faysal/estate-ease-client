@@ -7,7 +7,7 @@ import PropertisTable from "./component/PropertisTable";
 
 const MyProperties = () => {
   return (
-    <div className="h-screen">
+    <div className="">
       <Container>
         <div className="py-2 flex items-center justify-between">
           <Heading
