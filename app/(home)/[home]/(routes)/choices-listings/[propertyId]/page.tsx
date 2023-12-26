@@ -27,7 +27,18 @@ const PropertyDetails = ({ params }: Props) => {
           <Gallery images={data?.home.images} />
         </div>
 
-        <h1>{data?.home.title}</h1>
+        <div className="px-4 py-10 sm:px-6 lg:px-8 grid grid-cols-3">
+          <div className="col-span-2">
+            <h1>
+              {data?.home.title} {data?.home.price} {data?.home.offerPrice}
+            </h1>
+          </div>
+          <div>
+            <h1>
+              {data?.home.title} {data?.home.price} {data?.home.offerPrice}
+            </h1>
+          </div>
+        </div>
       </Container>
     </div>
   );
