@@ -39,8 +39,8 @@ const HomeBanner = () => {
           </button>
           <button className=" text-sm py-1 px-2 md:text-xl md:py-3 md:px-9  border border-[#A2DAC7]  text-[#eef2f5] font-semibold rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1]focus:ring-opacity-75 flex items-center gap-4">
             <span className="">
-              <BsFillPlayCircleFill />{" "}
-            </span>{" "}
+              <BsFillPlayCircleFill />
+            </span>
             Watch Video
           </button>
         </div>
