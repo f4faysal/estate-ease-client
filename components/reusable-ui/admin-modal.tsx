@@ -1,9 +1,7 @@
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
-
 import * as z from "zod";
-
 import { closeModal } from "@/redux/features/modal/modalSlice";
 import { Modal } from "./modal";
 

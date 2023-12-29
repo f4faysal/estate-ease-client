@@ -14,7 +14,7 @@ interface GalleryProps {
 
 const Gallery: React.FC<GalleryProps> = ({ images = [] }) => {
   return (
-    <Tab.Group as="div" className="grid grid-cols-4 grid-rows-2  gap-4 ">
+    <Tab.Group as="div" className="grid grid-cols-4 grid-rows-2 gap-4">
       <div className="col-span-2 row-span-2">
         <Tab.Panels className="aspect-square w-full">
           {images.map((image) => (

@@ -123,6 +123,7 @@ const SForm = () => {
 
     try {
       toast.success("values");
+      router.push("/search/choices-listings");
     } catch (err: any) {
       toast.error(err.message);
     }
