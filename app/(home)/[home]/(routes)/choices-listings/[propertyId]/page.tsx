@@ -9,6 +9,8 @@ import ReactDatePicker from "react-datepicker";
 import { IoIosArrowDown, IoIosArrowUp, IoIosStar } from "react-icons/io";
 import { FaCalendarAlt } from "react-icons/fa";
 import "react-datepicker/dist/react-datepicker.css";
+import Calculate from "@/components/calculate";
+import { differenceInDays } from "date-fns";
 interface Props {
   params: {
     propertyId: string;
@@ -19,11 +21,23 @@ interface Props {
 const PropertyDetails = ({ params }: Props) => {
   const [show, setShow] = useState<boolean>(false);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [endDate, setEndDate] = useState<Date | null>(new Date());
+ 
   const { data, isLoading } = usePropertyQuery(params.propertyId);
-  console.log(data);
   function numberWithCommas(x: number) {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   }
+  const calculateDateDistance = () => {
+    if (startDate && endDate) {
+      const distance = differenceInDays(endDate, startDate);
+      return distance;
+    }
+    return null;
+  };
+
+  const days = calculateDateDistance();
+
+
   if (isLoading) return <Loading />;
   return (
     <div>
@@ -98,10 +112,12 @@ const PropertyDetails = ({ params }: Props) => {
                     id="check-in"
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
-                    className="w-[100px] mx-auto outline-none"
+                    className="w-[105px] mx-auto outline-none"
                     dateFormat="PP"
                   />
-                  <label htmlFor="check-in"><IoIosArrowDown /></label>
+                  <label htmlFor="check-in">
+                    <IoIosArrowDown />
+                  </label>
                 </div>
               </div>
               <div className="w-[2px] h-[30px] bg-gray-600"></div>
@@ -112,17 +128,21 @@ const PropertyDetails = ({ params }: Props) => {
                   <FaCalendarAlt />
                   <ReactDatePicker
                     id="check-out"
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    className="w-[100px] mx-auto outline-none"
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    className="w-[105px] mx-auto outline-none"
                     dateFormat="PP"
                   />
                   <label htmlFor="check-out">
-                  <IoIosArrowDown />
+                    <IoIosArrowDown />
                   </label>
                 </div>
               </div>
             </div>
+            <button className="text-center bg-[#A2DAC7] w-full p-2 rounded-[16px] h-[46px] mt-10 text-white">
+              Rent Now
+            </button>
+            <Calculate price={data?.home?.price} days={days} />
           </div>
         </div>
       </Container>
