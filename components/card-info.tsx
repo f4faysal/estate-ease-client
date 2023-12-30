@@ -19,6 +19,7 @@ const CardInfo = ({ propertys }: any) => {
 
   const handelRentNow = () => {
     toast.success("Rent Now");
+    dispatch(openModal());
   };
 
   const { data } = useHomeOwnerQuery(propertys?.homeOwnerId?.id);
@@ -81,12 +82,9 @@ const CardInfo = ({ propertys }: any) => {
           <span>{propertys?.home?.address}</span>
         </p>
       </div>
-      <div
-        onClick={handelRentNow}
-        className="w-full mt-3 flex justify-between gap-2"
-      >
+      <div className="w-full mt-3 flex justify-between gap-2">
         <button
-          onClick={() => dispatch(openModal())}
+          onClick={handelRentNow}
           className="w-1/2  text-white border rounded-lg bg-[#A2DAC7] capitalize hover:bg-[#88dcc0] text-[14px] p-1 transform transition duration-500 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95"
         >
           Rent Now
