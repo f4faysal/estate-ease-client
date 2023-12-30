@@ -1,7 +1,11 @@
+"use client";
+
 import { cva, type VariantProps } from "class-variance-authority";
 import { AlertTriangle, CheckCircleIcon } from "lucide-react";
 
+import Loading from "@/app/loading";
 import { cn } from "@/lib/utils";
+import { useMyProfileQuery } from "@/redux/api/authApi";
 import Container from "./ui/container";
 
 const bannerVariants = cva(
@@ -31,8 +35,16 @@ const iconMap = {
 export const Banner = ({ label, variant }: BannerProps) => {
   const Icon = iconMap[variant || "warning"];
 
+  const { data, isLoading } = useMyProfileQuery({});
+
+  const isVerified = data?.nidVerified ? "hidden" : "block";
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
-    <div className={cn(bannerVariants({ variant }))}>
+    <div className={cn(bannerVariants({ variant }), isVerified)}>
       <Container>
         <div className="flex gap-2">
           <Icon className="h-4 w-4 mr-2" />
