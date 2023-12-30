@@ -1,15 +1,14 @@
 "use client";
 
-import { usePropertysQuery } from "@/redux/api/propertysApi";
-import { setProperty } from "@/redux/features/property/propertySlice";
+import { locationArray, residentialArray } from "@/constants/global";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { z } from "zod";
+import SelectInputField from "../select-input-fild";
 import { Form, FormField } from "../ui/form";
 import { Input } from "../ui/input";
 
@@ -97,20 +96,9 @@ const formSchema = z.object({
 const SForm = () => {
   const router = useRouter();
 
-  const { data, isLoading, refetch } = usePropertysQuery({
-    limit: 10,
-    page: 1,
-  });
-
-  console.log(data);
-
   const dispatch = useDispatch();
 
   const user = useSelector((state: any) => state.user.property);
-
-  useEffect(() => {
-    dispatch(setProperty(data?.property));
-  }, [data, dispatch]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -119,24 +107,22 @@ const SForm = () => {
   const { handleSubmit, reset } = form;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    // setLocation(values.residential || "");
+    // setResidential(values.location || "");
+
     console.log("values", values);
 
     try {
       toast.success("values");
-      router.push("/search/choices-listings");
+      window.location.href = `/search/choices-listings?location=${values.location}&residential=${values.residential}&numberOfRooms=${values.numberOfRooms}&numberOfBathrooms=${values.numberOfBathrooms}&homeSize=${values.homeSize}&price=${values.price}`;
+      // router.push("/search/choices-listings");
+      // router.push("/search/choices-listings");
     } catch (err: any) {
       toast.error(err.message);
     }
   };
 
-  const handelSearch = () => {
-    console.log("search", user);
-    // window.location.href = "/search/choices-listings";
-    router.push("/search/choices-listings");
-    refetch();
-  };
-
-  if (isLoading) return <div>loading...</div>;
+  // if (isLoading) return <div>loading...</div>;
 
   return (
     <div className="">
@@ -159,48 +145,72 @@ const SForm = () => {
                     control={form.control}
                     name="location"
                     render={({ field }) => (
-                      <Input {...field} placeholder="Location Dropdown  " />
+                      <SelectInputField
+                        field={field}
+                        placeholder="Select a Location"
+                        mapData={locationArray}
+                      />
                     )}
                   />
                 </div>
               </div>
+
+              {/* homeSizeDetails */}
+
               <div className="w-full">
                 <div className="ps-5">
                   <FormField
                     control={form.control}
                     name="residential"
                     render={({ field }) => (
-                      <Input {...field} placeholder="Residential Dropdown" />
+                      <SelectInputField
+                        field={field}
+                        placeholder="Residential"
+                        mapData={residentialArray}
+                      />
                     )}
                   />
                 </div>
               </div>
+
               <div className="w-full">
-                <div className="ps-5">
+                <div className="ps-2 flex gap-2">
                   <FormField
                     control={form.control}
-                    name="homeSize"
+                    name="numberOfBathrooms"
                     render={({ field }) => (
-                      <Input {...field} placeholder="homeSize" />
+                      <Input {...field} placeholder="Beds" />
                     )}
                   />
                   <FormField
                     control={form.control}
                     name="numberOfRooms"
                     render={({ field }) => (
-                      <Input {...field} placeholder="numberOfRooms" />
+                      <Input {...field} placeholder="Baths" />
                     )}
                   />
                 </div>
               </div>
               <div className="w-full">
-                <div className="ps-5">
+                <div className="ps-2 flex gap-2">
                   <FormField
                     control={form.control}
                     name="homeSize"
-                    render={({ field }) => <Input {...field} placeholder="" />}
+                    render={({ field }) => (
+                      <Input {...field} placeholder="Area (sqft)" />
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="price"
+                    render={({ field }) => (
+                      <Input {...field} placeholder="price" />
+                    )}
                   />
                 </div>
+                {/* <div className="ps-5">
+                  
+                </div> */}
               </div>
               <div className="w-full">
                 <button
