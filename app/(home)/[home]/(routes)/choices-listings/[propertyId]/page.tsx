@@ -101,7 +101,9 @@ const PropertyDetails = ({ params }: Props) => {
                     className="w-[100px] mx-auto outline-none"
                     dateFormat="PP"
                   />
-                  <label htmlFor="check-in"><IoIosArrowDown /></label>
+                  <label htmlFor="check-in">
+                    <IoIosArrowDown />
+                  </label>
                 </div>
               </div>
               <div className="w-[2px] h-[30px] bg-gray-600"></div>
@@ -118,7 +120,7 @@ const PropertyDetails = ({ params }: Props) => {
                     dateFormat="PP"
                   />
                   <label htmlFor="check-out">
-                  <IoIosArrowDown />
+                    <IoIosArrowDown />
                   </label>
                 </div>
               </div>
