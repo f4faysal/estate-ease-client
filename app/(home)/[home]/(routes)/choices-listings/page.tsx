@@ -4,9 +4,47 @@ import Loading from "@/app/loading";
 import CardInfo from "@/components/card-info";
 import Container from "@/components/ui/container";
 import { usePropertysQuery } from "@/redux/api/propertysApi";
+import { setProperty } from "@/redux/features/property/propertySlice";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 const ChoicesListings = () => {
-  const { data, isLoading } = usePropertysQuery({});
+  const searchParams = useSearchParams();
+
+  console.log();
+
+  const query: Record<string, any> = {};
+  const dispatch = useDispatch();
+
+  // const [page, setPage] = useState<number>(1);
+  // const [size, setSize] = useState<number>(10);
+  // const [location, setLocation] = useState<string>("");
+  // const [residential, setResidential] = useState<string>("");
+
+  // query["limit"] = size;
+  // query["page"] = page;
+  const residential = searchParams.get("residential");
+  const location = searchParams.get("location");
+
+  console.log(residential, location);
+
+  query["location"] = location === "undefined" ? "Gulshan" : location;
+  query["residential"] = residential === "undefined" ? "House" : residential;
+
+  // query["searchTerm"] = searchTerm;
+
+  const { data, isLoading, refetch } = usePropertysQuery({
+    limit: 1000,
+    page: 1,
+    ...query,
+  });
+
+  console.log(data);
+
+  useEffect(() => {
+    dispatch(setProperty(data?.property));
+  }, [data, dispatch]);
 
   const { property, meta }: any = data || [];
 

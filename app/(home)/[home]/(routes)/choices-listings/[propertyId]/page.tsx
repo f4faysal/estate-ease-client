@@ -6,9 +6,12 @@ import Container from "@/components/ui/container";
 import { usePropertyQuery } from "@/redux/api/propertysApi";
 import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
-import { IoIosArrowDown, IoIosArrowUp, IoIosStar } from "react-icons/io";
-import { FaCalendarAlt } from "react-icons/fa";
 import "react-datepicker/dist/react-datepicker.css";
+import { FaCalendarAlt } from "react-icons/fa";
+import { IoIosArrowDown, IoIosArrowUp, IoIosStar } from "react-icons/io";
+import { LiaBathSolid } from "react-icons/lia";
+import { LuBedSingle } from "react-icons/lu";
+import { MdOutlineWindow } from "react-icons/md";
 interface Props {
   params: {
     propertyId: string;
@@ -37,16 +40,26 @@ const PropertyDetails = ({ params }: Props) => {
         <div className="px-4 py-10 sm:px-6 lg:px-8 grid grid-cols-5 gap-10">
           <div className="col-span-3">
             <h1>{data?.home.title}</h1>
+
             <div className="flex gap-[12px]">
-              <span>{data?.home?.homeSizeDetails?.numberOfRooms} Rooms</span>
-              <div className="w-[1px] bg-gray-500"></div>
-              <span>{data?.home?.homeSizeDetails?.numberOfBathrooms} Bath</span>
+              <span>
+                {" "}
+                <LuBedSingle className="w-7 h-7" />{" "}
+                {data?.home?.homeSizeDetails?.numberOfRooms} Rooms
+              </span>
               <div className="w-[2px] bg-gray-500"></div>
               <span>
+                <LiaBathSolid className="w-7 h-7" />{" "}
+                {data?.home?.homeSizeDetails?.numberOfBathrooms} Bath
+              </span>
+              <div className="w-[2px] bg-gray-500"></div>
+              <span>
+                <MdOutlineWindow className="w-7 h-7" />
                 {data?.home?.homeSizeDetails?.numberOfBalconies} Balconi
               </span>
               <div className="w-[2px] bg-gray-500"></div>
               <span>
+                <MdOutlineWindow className="w-7 h-7" />
                 {data?.home?.homeSizeDetails?.numberOfBalconies} Windows
               </span>
             </div>
@@ -101,7 +114,9 @@ const PropertyDetails = ({ params }: Props) => {
                     className="w-[100px] mx-auto outline-none"
                     dateFormat="PP"
                   />
-                  <label htmlFor="check-in"><IoIosArrowDown /></label>
+                  <label htmlFor="check-in">
+                    <IoIosArrowDown />
+                  </label>
                 </div>
               </div>
               <div className="w-[2px] h-[30px] bg-gray-600"></div>
@@ -118,7 +133,7 @@ const PropertyDetails = ({ params }: Props) => {
                     dateFormat="PP"
                   />
                   <label htmlFor="check-out">
-                  <IoIosArrowDown />
+                    <IoIosArrowDown />
                   </label>
                 </div>
               </div>

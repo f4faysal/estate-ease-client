@@ -7,9 +7,10 @@ export const propertyApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     // getPropertys
     propertys: build.query({
-      query: ({}) => ({
+      query: (arg) => ({
         url: `${Property_URL}`,
         method: "GET",
+        params: arg,
       }),
       transformResponse: (response, meta) => {
         return {
@@ -17,7 +18,6 @@ export const propertyApi = baseApi.injectEndpoints({
           meta,
         };
       },
-
       providesTags: [tagTypes.property],
     }),
     // getProperty
@@ -52,4 +52,5 @@ export const {
   usePropertysQuery,
   usePropertyQuery,
   useCreatePropertyMutation,
+  useMyPropertysQuery,
 } = propertyApi;

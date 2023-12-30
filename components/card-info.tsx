@@ -1,22 +1,43 @@
+"use client";
+
+import { useHomeOwnerQuery } from "@/redux/api/homeOwnersApi";
+import { openModal } from "@/redux/features/modal/modalSlice";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { GiRoundStar } from "react-icons/gi";
 import { LiaBathSolid } from "react-icons/lia";
 import { LuBedSingle } from "react-icons/lu";
 import { MdOutlineWindow } from "react-icons/md";
 import { PiMapPin } from "react-icons/pi";
+import { useDispatch } from "react-redux";
+import UseModal from "./reusable-ui/admin-modal";
 
 const CardInfo = ({ propertys }: any) => {
-  const router = useRouter();
+  console.log(propertys);
+  const dispatch = useDispatch();
 
   const handelRentNow = () => {
     toast.success("Rent Now");
+    dispatch(openModal());
   };
+
+  const { data } = useHomeOwnerQuery(propertys?.homeOwnerId?.id);
 
   return (
     <div className="w-full">
+      <UseModal
+        title="Please contact owner"
+        description="Please contact owner to rent this property click on the button below"
+      >
+        <div className="p-6 flex justify-between">
+          <button className="w-1/2 text-center border rounded-lg bg-[#22d12b] capitalize text-black hover:bg-[#b8d9f0] text-[14px] p-1 transform transition duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95">
+            <Link href={`tell:${data?.contactNo}`}>Call Now</Link>
+          </button>
+          <p className="p-3 border rounded-lg ">{data?.contactNo}</p>
+        </div>
+      </UseModal>
+
       <div className="w-full h-[240px]">
         <Image
           className="rounded-lg"
@@ -33,7 +54,9 @@ const CardInfo = ({ propertys }: any) => {
         />
       </div>
       <div className="mt-3 flex justify-between items-center">
-        <div className="text-xl font-bold ">${propertys?.home?.price}</div>
+        <div className="text-xl font-bold ">
+          {propertys?.home?.price} ৳ Rent
+        </div>
 
         <p className="text-sm font-semibold flex items-baseline gap-1 ">
           <GiRoundStar />
@@ -59,11 +82,11 @@ const CardInfo = ({ propertys }: any) => {
           <span>{propertys?.home?.address}</span>
         </p>
       </div>
-      <div
-        onClick={handelRentNow}
-        className="w-full mt-3 flex justify-between gap-2"
-      >
-        <button className="w-1/2  text-white border rounded-lg bg-[#A2DAC7] capitalize hover:bg-[#88dcc0] text-[14px] p-1 transform transition duration-500 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95">
+      <div className="w-full mt-3 flex justify-between gap-2">
+        <button
+          onClick={handelRentNow}
+          className="w-1/2  text-white border rounded-lg bg-[#A2DAC7] capitalize hover:bg-[#88dcc0] text-[14px] p-1 transform transition duration-500 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95"
+        >
           Rent Now
         </button>
         <Link
