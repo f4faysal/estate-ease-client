@@ -2,6 +2,7 @@
 
 import { useHomeOwnerQuery } from "@/redux/api/homeOwnersApi";
 import { openModal } from "@/redux/features/modal/modalSlice";
+import { getUserInfo } from "@/services/auth.service";
 import Image from "next/image";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -12,9 +13,11 @@ import { MdOutlineWindow } from "react-icons/md";
 import { PiMapPin } from "react-icons/pi";
 import { useDispatch } from "react-redux";
 import UseModal from "./reusable-ui/admin-modal";
+import { Button } from "./ui/button";
 
 const CardInfo = ({ propertys }: any) => {
-  console.log(propertys);
+  const { userId } = getUserInfo() as any;
+
   const dispatch = useDispatch();
 
   const handelRentNow = () => {
@@ -30,12 +33,21 @@ const CardInfo = ({ propertys }: any) => {
         title="Please contact owner"
         description="Please contact owner to rent this property click on the button below"
       >
-        <div className="p-6 flex justify-between">
-          <button className="w-1/2 text-center border rounded-lg bg-[#22d12b] capitalize text-black hover:bg-[#b8d9f0] text-[14px] p-1 transform transition duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95">
-            <Link href={`tell:${data?.contactNo}`}>Call Now</Link>
-          </button>
-          <p className="p-3 border rounded-lg ">{data?.contactNo}</p>
-        </div>
+        {userId ? (
+          <div className="p-6 flex justify-between">
+            <button className="w-1/2 text-center border rounded-lg bg-[#22d12b] capitalize text-black hover:bg-[#b8d9f0] text-[14px] p-1 transform transition duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95">
+              <Link href={`tell:${data?.contactNo}`}>Call Now</Link>
+            </button>
+            <p className="p-3 border rounded-lg ">{data?.contactNo}</p>
+          </div>
+        ) : (
+          <div className="py-4">
+            <p className="py-5 text-xl">Please login to rent this property</p>
+            <Link href={`/sign-in`}>
+              <Button className="w-full mt-3">Login</Button>
+            </Link>
+          </div>
+        )}
       </UseModal>
 
       <div className="w-full h-[240px]">

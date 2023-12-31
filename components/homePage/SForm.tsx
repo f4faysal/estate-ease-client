@@ -113,7 +113,7 @@ const SForm = () => {
     console.log("values", values);
 
     try {
-      toast.success("values");
+      toast.success("Search Successful !");
       window.location.href = `/search/choices-listings?location=${values.location}&residential=${values.residential}&numberOfRooms=${values.numberOfRooms}&numberOfBathrooms=${values.numberOfBathrooms}&homeSize=${values.homeSize}&price=${values.price}`;
       // router.push("/search/choices-listings");
       // router.push("/search/choices-listings");
