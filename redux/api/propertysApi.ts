@@ -45,6 +45,14 @@ export const propertyApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.property],
     }),
+
+    deleteProperty: build.mutation({
+      query: (id) => ({
+        url: `${Property_URL}/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.property],
+    }),
   }),
 });
 
@@ -53,4 +61,5 @@ export const {
   usePropertyQuery,
   useCreatePropertyMutation,
   useMyPropertysQuery,
+  useDeletePropertyMutation,
 } = propertyApi;

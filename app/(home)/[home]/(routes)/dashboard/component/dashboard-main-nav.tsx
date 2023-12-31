@@ -26,17 +26,17 @@ export function DashboardMainNav({
       active: pathname === `/en/dashboard/add-property`,
     },
     {
-      href: `/en/dashboard/my-favorites`,
+      href: `/en/dashboard`,
       label: "My Favorites",
       active: pathname === `/en/dashboard/my-favorites`,
     },
     {
-      href: `/en/dashboard/notification`,
+      href: `/en/dashboard`,
       label: "Notification",
       active: pathname === `/en/dashboard/notification`,
     },
     {
-      href: `/en/dashboard/settings`,
+      href: `/en/dashboard`,
       label: "Settings",
       active: pathname === `/en/dashboard/settings`,
     },
