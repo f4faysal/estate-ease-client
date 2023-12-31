@@ -5,7 +5,7 @@ import { useMyProfileQuery } from "@/redux/api/authApi";
 import { Cog, HomeIcon, MessageSquare } from "lucide-react";
 
 const MyProfile = () => {
-  const { data } = useMyProfileQuery({});
+  const { data, isLoading } = useMyProfileQuery({});
   console.log(data);
 
   const user = data?.rentUser || data?.homeOwner;
@@ -21,16 +21,16 @@ const MyProfile = () => {
             <div className="flex items-center gap-6">
               {/* className="inline-block relative object-cover object-center w-[74px] h-[74px] rounded-lg shadow-lg shadow-blue-gray-500/40" */}
               <Avatar className=" w-[74px] h-[74px] rounded-lg shadow-lg shadow-blue-gray-500/40">
-                <AvatarImage src={user.profileImage} />
+                <AvatarImage src={user?.profileImage} />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
 
               <div>
                 <h5 className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 mb-1">
-                  {`${user.name?.firstName} ${user.name?.middleName} ${user.name?.lastName}`}
+                  {`${user?.name?.firstName} ${user?.name?.middleName} ${user?.name?.lastName}`}
                 </h5>
                 <p className=" text-sm leading-normal font-normal text-blue-gray-600">
-                  User Id : <span className="font-bold">{user.id}</span>
+                  User Id : <span className="font-bold">{user?.id}</span>
                 </p>
               </div>
             </div>
