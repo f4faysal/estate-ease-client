@@ -2,9 +2,11 @@
 
 import Loading from "@/app/loading";
 import CardInfo from "@/components/card-info";
+import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import { usePropertysQuery } from "@/redux/api/propertysApi";
 import { setProperty } from "@/redux/features/property/propertySlice";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -63,11 +65,20 @@ const ChoicesListings = () => {
         </p>
       </div>
       <Container>
-        <div className="-mt-28 px-3 mb-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {property?.map((propertys: any, i: number) => (
-            <CardInfo key={i} propertys={propertys} />
-          ))}
-        </div>
+        {property?.length !== 0 ? (
+          <div className="-mt-28 px-3 mb-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 min-h-screen">
+            {property?.map((propertys: any, i: number) => (
+              <CardInfo key={i} propertys={propertys} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-2xl font-bold min-h-[50vh] flex flex-col items-center justify-center">
+            <p>No property found for this location and residential type</p>
+            <Link href="/">
+              <Button>Go back</Button>
+            </Link>
+          </div>
+        )}
       </Container>
     </div>
   );
