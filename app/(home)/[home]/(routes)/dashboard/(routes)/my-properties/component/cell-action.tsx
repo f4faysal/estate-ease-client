@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { AlertModal } from "@/components/reusable-ui/alert-modal";
+import { useDeletePropertyMutation } from "@/redux/api/propertysApi";
 import { getUserInfo } from "@/services/auth.service";
 import { AdminColumn } from "./columns";
 
@@ -30,10 +31,12 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [DeleteProperty] = useDeletePropertyMutation();
+
   const onConfirm = async () => {
     try {
-      console.log("data", data.id);
-
+      const res = await DeleteProperty(data.id);
+      console.log("data", data.id, res);
       setLoading(true);
       // await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
       toast.success("Billboard deleted.");
@@ -71,11 +74,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-          <DropdownMenuItem
-            onClick={() =>
-              router.push(`/en/dashboard/my-properties/${data.id}`)
-            }
-          >
+          <DropdownMenuItem onClick={() => toast.success("Coming soon.")}>
             <Edit className="mr-2 h-4 w-4" /> Update
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
