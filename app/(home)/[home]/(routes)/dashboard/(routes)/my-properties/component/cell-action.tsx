@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -33,8 +32,10 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const onConfirm = async () => {
     try {
+      console.log("data", data.id);
+
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
+      // await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
       toast.success("Billboard deleted.");
       router.refresh();
     } catch (error) {
