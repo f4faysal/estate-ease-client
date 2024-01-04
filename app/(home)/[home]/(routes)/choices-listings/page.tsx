@@ -31,10 +31,12 @@ const ChoicesListings = () => {
 
   console.log(residential, location);
 
-  query["location"] = location === "undefined" ? "Gulshan" : location;
-  query["residential"] = residential === "undefined" ? "House" : residential;
+  query["location"] = location === undefined ? "Gulshan" : location;
+  query["residential"] = residential === undefined ? "House" : residential;
 
   // query["searchTerm"] = searchTerm;
+
+  console.log(query);
 
   const { data, isLoading, refetch } = usePropertysQuery({
     limit: 1000,

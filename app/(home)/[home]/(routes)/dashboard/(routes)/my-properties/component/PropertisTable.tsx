@@ -25,7 +25,7 @@ const PropertisTable = () => {
 
   const properties = filteredProperty?.map((item: any) => ({
     id: item?.id,
-    status: item?.homeStatus,
+    status: "available",
     title: item?.home?.title,
     price: item?.home?.price,
     offerPrice: item?.home?.offerPrice,

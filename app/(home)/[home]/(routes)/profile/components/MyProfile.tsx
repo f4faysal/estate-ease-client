@@ -6,7 +6,7 @@ import { Cog, HomeIcon, MessageSquare } from "lucide-react";
 
 const MyProfile = () => {
   const { data, isLoading } = useMyProfileQuery({});
-  console.log(data);
+  // console.log(data);
 
   const user = data?.rentUser || data?.homeOwner;
 
@@ -139,7 +139,7 @@ const MyProfile = () => {
                       first name:
                     </p>
                     <p className=" text-sm leading-normal font-normal text-blue-gray-500">
-                      {`${user.name?.firstName} ${user.name?.middleName} ${user.name?.lastName}`}
+                      {`${user?.name?.firstName} ${user?.name?.middleName} ${user?.name?.lastName}`}
                     </p>
                   </li>
                   <li className="flex items-center gap-4">
@@ -147,7 +147,7 @@ const MyProfile = () => {
                       mobile:
                     </p>
                     <p className=" text-sm leading-normal font-normal text-blue-gray-500">
-                      {user.contactNo}
+                      {user?.contactNo}
                     </p>
                   </li>
                   <li className="flex items-center gap-4">
@@ -155,7 +155,7 @@ const MyProfile = () => {
                       email:
                     </p>
                     <p className=" text-sm leading-normal font-normal text-blue-gray-500">
-                      {user.email}
+                      {user?.email}
                     </p>
                   </li>
                   <li className="flex items-center gap-4">
@@ -163,7 +163,7 @@ const MyProfile = () => {
                       Address:
                     </p>
                     <p className=" text-sm leading-normal font-normal text-blue-gray-500">
-                      {user.presentAddress}
+                      {user?.presentAddress}
                     </p>
                   </li>
                   <li className="flex items-center gap-4">
@@ -171,7 +171,7 @@ const MyProfile = () => {
                       bloodGroup:
                     </p>
                     <p className=" text-sm leading-normal font-normal text-blue-gray-500">
-                      {user.bloodGroup}
+                      {user?.bloodGroup}
                     </p>
                   </li>
                   {/* <li className="flex items-center gap-4">
