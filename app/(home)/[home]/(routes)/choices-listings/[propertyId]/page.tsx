@@ -265,8 +265,7 @@ const PropertyDetails = ({ params }: Props) => {
             </div>
           </div>
           <OwnerBehaviorsCommonQuestions data={data} />
-
-          <RatingAndReviews />
+          <RatingAndReviews propertyId={params.propertyId} />
         </div>
       </Container>
     </div>

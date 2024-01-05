@@ -2,13 +2,18 @@
 
 import Loading from "@/app/loading";
 import { useMyProfileQuery } from "@/redux/api/authApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-const RatingAndReviews = ({}) => {
+const RatingAndReviews = ({ propertyId }: any) => {
   const { data, isLoading } = useMyProfileQuery({});
+  const [reviews, setReviews] = useState([]);
 
-  console.log(data);
+  useEffect(() => {
+    // Retrieve reviews from local storage on component mount
+    const storedReviews = JSON.parse(localStorage.getItem("reviews") || "[]");
+    setReviews(storedReviews);
+  }, []);
 
   const fullName = data?.rentUser
     ? `${data?.rentUser?.name?.firstName} ${data?.rentUser?.name?.middleName} ${data?.rentUser?.name?.lastName}`
@@ -18,7 +23,12 @@ const RatingAndReviews = ({}) => {
     ? data?.rentUser?.profileImage
     : data?.homeOwner?.profileImage;
 
-  const [x, setX] = useState([
+  // ... (existing code)
+
+  const [rating, setRating] = useState("5");
+  const [reviewTitle, setReviewTitle] = useState("");
+  const [reviewContent, setReviewContent] = useState("");
+  const reviewsss: any = [
     {
       id: 1,
       rating: 5,
@@ -27,17 +37,6 @@ const RatingAndReviews = ({}) => {
         "I had a fantastic time using this product. It was easy to set up and worked exactly as expected. I would highly recommend it to anyone looking for a solution like this.",
       user: {
         name: "Mou",
-        avatar: "https://picsum.photos/64/64",
-      },
-    },
-    {
-      id: 2,
-      rating: 4,
-      title: "Great product!",
-      content:
-        "This product exceeded my expectations. It's user-friendly and provides great value for the money. I'm very satisfied with my purchase.",
-      user: {
-        name: "Alex",
         avatar: "https://picsum.photos/64/64",
       },
     },
@@ -85,12 +84,7 @@ const RatingAndReviews = ({}) => {
         avatar: "https://picsum.photos/64/64",
       },
     },
-  ]);
-
-  const [rating, setRating] = useState("5");
-  const [reviewTitle, setReviewTitle] = useState("");
-  const [reviewContent, setReviewContent] = useState("");
-
+  ];
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
 
@@ -99,9 +93,9 @@ const RatingAndReviews = ({}) => {
       return;
     }
 
-    toast.success("Successfully Submitted");
+    // Create a new review object
     const newReview = {
-      id: x.length + 1,
+      id: reviews.length + 1,
       rating: parseInt(rating, 10),
       title: reviewTitle,
       content: reviewContent,
@@ -111,11 +105,17 @@ const RatingAndReviews = ({}) => {
       },
     };
 
-    const updatedReviews = [...x, newReview];
-    setX(updatedReviews);
+    // Update the reviews state
+    const updatedReviews: any = [...reviews, newReview, ...reviewsss];
+    setReviews(updatedReviews);
+
+    // Save the reviews to local storage
+    localStorage.setItem("reviews", JSON.stringify(updatedReviews));
+
+    toast.success("Successfully Submitted");
 
     // Clear form fields after submission
-    setRating("5");
+    setRating("Select a rating");
     setReviewTitle("");
     setReviewContent("");
   };
@@ -127,7 +127,6 @@ const RatingAndReviews = ({}) => {
       <form className="container mx-auto p-4" onSubmit={handleFormSubmit}>
         <h1 className="text-2xl font-bold mb-8">Leave a Review</h1>
 
-        {/* Your Rating */}
         <div className="mb-4">
           <label
             htmlFor="rating"
@@ -136,25 +135,20 @@ const RatingAndReviews = ({}) => {
             Your Rating
           </label>
           <div className="flex items-center">
-            {/* ... Other rating options */}
-            <input
-              type="radio"
-              id="rating-5"
-              name="rating"
-              value="5"
-              className="w-4 h-4 text-yellow-500 border-gray-300 focus:ring-yellow-200"
-              checked={rating === "5"}
-              onChange={() => setRating("5")}
-            />
-            <label
-              htmlFor="rating-5"
-              className="ml-3 block text-sm font-medium text-gray-700"
+            <select
+              id="rating"
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
+              className="w-full py-2 px-3 border rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             >
-              5 stars
-            </label>
+              {[1, 2, 3, 4, 5].map((option) => (
+                <option key={option} value={option}>
+                  {option} stars
+                </option>
+              ))}
+            </select>
           </div>
         </div>
-
         {/* Review Title */}
         <div className="mb-6">
           <label
@@ -201,7 +195,7 @@ const RatingAndReviews = ({}) => {
       </form>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8">
-        {x.map((review: any) => (
+        {reviews.map((review: any) => (
           <div key={review.id} className="bg-white rounded-lg shadow-md p-4">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-medium">{review.title}</h3>
