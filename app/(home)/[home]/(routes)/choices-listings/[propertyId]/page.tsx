@@ -264,29 +264,6 @@ const PropertyDetails = ({ params }: Props) => {
               </div>
             </div>
           </div>
-          {/* <div className="col-span-5">
-            <h1 className="text-2xl font-bold">
-              Owner Behaviors Common Question
-            </h1>
-
-            <div className="grid grid-cols-2 gap-5">
-              {data?.ownerBehaviourCommonQuestion?.map(
-                (item: any, i: number) => (
-                  <div key={i} className="col-span-1">
-                    <p className="font-bold">{item.question}</p>
-                    <ul className="list-disc list-inside">
-                      {item.answers?.map((answer: any, i: any) => (
-                        <li key={i}>
-                          <span className="">{answer}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )
-              )}
-            </div>
-          
-          </div> */}
           <OwnerBehaviorsCommonQuestions data={data} />
 
           <RatingAndReviews />
