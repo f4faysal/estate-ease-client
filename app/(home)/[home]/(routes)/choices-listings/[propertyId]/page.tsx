@@ -8,9 +8,7 @@ import Container from "@/components/ui/container";
 import { usePropertyQuery } from "@/redux/api/propertysApi";
 import { HomeIcon, MapIcon, MapPinIcon } from "lucide-react";
 import { useState } from "react";
-import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { FaCalendarAlt } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoIosStar } from "react-icons/io";
 import { LiaBathSolid } from "react-icons/lia";
 import { LuBedSingle } from "react-icons/lu";
@@ -25,8 +23,9 @@ interface Props {
 const PropertyDetails = ({ params }: Props) => {
   const [show, setShow] = useState<boolean>(false);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
-  const [checked, setChecked] = useState(false);
+
   const { data, isLoading } = usePropertyQuery(params.propertyId);
+
   console.log(data);
 
   function numberWithCommas(x: number) {
@@ -35,63 +34,6 @@ const PropertyDetails = ({ params }: Props) => {
 
   if (isLoading) return <Loading />;
 
-  const x = [
-    {
-      id: 1,
-      rating: 5,
-      title: "Excellent experience!",
-      content:
-        "I had a fantastic time using this product. It was easy to set up and worked exactly as expected. I would highly recommend it to anyone looking for a solution like this.",
-      user: {
-        name: "John Doe",
-        avatar: "https://picsum.photos/64/64",
-      },
-    },
-    {
-      id: 2,
-      rating: 4,
-      title: "Good, but could be better",
-      content:
-        "This product worked well most of the time, but I encountered a few bugs that were frustrating. Overall, it's a good option, but I hope the developers can fix those issues soon.",
-      user: {
-        name: "Jane Smith",
-        avatar: "https://picsum.photos/64/64",
-      },
-    },
-    {
-      id: 3,
-      rating: 3,
-      title: "Mixed feelings",
-      content:
-        "Some parts of this product were great, while others were disappointing. I'm not sure if I would recommend it to everyone, as it depends on your needs and priorities.",
-      user: {
-        name: "Sarah Lee",
-        avatar: "https://picsum.photos/64/64",
-      },
-    },
-    {
-      id: 4,
-      rating: 2,
-      title: "Not impressed",
-      content:
-        "This product was quite difficult to use and didn't meet my expectations. I would advise looking for other options before making a purchase.",
-      user: {
-        name: "David Miller",
-        avatar: "https://picsum.photos/64/64",
-      },
-    },
-    {
-      id: 5,
-      rating: 1,
-      title: "Avoid at all costs",
-      content:
-        "This product was a complete disaster. It was buggy, slow, and unresponsive. I would strongly recommend staying away from it.",
-      user: {
-        name: "Emma Brown",
-        avatar: "https://picsum.photos/64/64",
-      },
-    },
-  ];
   return (
     <div>
       <div className="w-full h-[300px] bg-[#EBF6FF] rounded-lg"></div>
@@ -195,44 +137,9 @@ const PropertyDetails = ({ params }: Props) => {
                 </span>
               </div>
             </div>
-            <div className="flex justify-center gap-10 border mt-4 py-3 rounded-md items-center bg-white shadow">
-              <div className="flex flex-col">
-                <label htmlFor="check-in">Check In</label>
-                <div className="flex items-center gap-2">
-                  <FaCalendarAlt />
-                  <ReactDatePicker
-                    id="check-in"
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    className="w-[100px] mx-auto outline-none"
-                    dateFormat="PP"
-                  />
-                  <label htmlFor="check-in">
-                    <IoIosArrowDown />
-                  </label>
-                </div>
-              </div>
-              <div className="w-[2px] h-[30px] bg-gray-600"></div>
-              <div>
-                <label htmlFor="check-out">Check out</label>
-                <br />
-                <div className="flex items-center gap-2">
-                  <FaCalendarAlt />
-                  <ReactDatePicker
-                    id="check-out"
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    className="w-[100px] mx-auto outline-none"
-                    dateFormat="PP"
-                  />
-                  <label htmlFor="check-out">
-                    <IoIosArrowDown />
-                  </label>
-                </div>
-              </div>
-            </div>
+            <div className="flex justify-center gap-10  mt-4 py-3 rounded-md items-center"></div>
 
-            <div>
+            <div className="border rounded-md p-2 bg-white shadow">
               <button className="bg-[#FFD600] w-full py-3 mt-5 rounded-md text-white">
                 Book Now
               </button>

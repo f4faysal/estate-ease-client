@@ -1,12 +1,11 @@
 "use client";
 
 import { Tab } from "@headlessui/react";
-import NextImage from "next/image";
 
 // import { Image } from "@/types";
 
-import GalleryTab from "./gallery-tab";
 import Image from "next/image";
+import GalleryTab from "./gallery-tab";
 
 interface GalleryProps {
   images: any[];
@@ -14,7 +13,7 @@ interface GalleryProps {
 
 const Gallery: React.FC<GalleryProps> = ({ images = [] }) => {
   return (
-    <Tab.Group as="div" className="grid grid-cols-4 grid-rows-2 gap-4">
+    <Tab.Group as="div" className=" grid grid-cols-4 grid-rows-2 gap-4">
       <div className="col-span-2 row-span-2">
         <Tab.Panels className="aspect-square w-full">
           {images.map((image) => (
@@ -24,7 +23,7 @@ const Gallery: React.FC<GalleryProps> = ({ images = [] }) => {
                   fill
                   src={image.url}
                   alt="Image"
-                  className="object-cover object-center "
+                  className="object-cover object-center"
                 />
               </div>
             </Tab.Panel>
