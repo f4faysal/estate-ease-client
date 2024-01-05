@@ -4,15 +4,23 @@ import Loading from "@/app/loading";
 import RatingAndReviews from "@/components/RatingAndReviews";
 import OwnerBehaviorsCommonQuestions from "@/components/commonQuestions";
 import Gallery from "@/components/gallery/ingex";
+import UseModal from "@/components/reusable-ui/admin-modal";
+import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
+import { useHomeOwnerQuery } from "@/redux/api/homeOwnersApi";
 import { usePropertyQuery } from "@/redux/api/propertysApi";
-import { HomeIcon, MapIcon, MapPinIcon } from "lucide-react";
+import { openModal } from "@/redux/features/modal/modalSlice";
+import { HomeIcon, MapIcon, MapPinIcon, PhoneCall } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
+import toast from "react-hot-toast";
 import { IoIosArrowDown, IoIosArrowUp, IoIosStar } from "react-icons/io";
 import { LiaBathSolid } from "react-icons/lia";
 import { LuBedSingle } from "react-icons/lu";
 import { MdOutlineWindow } from "react-icons/md";
+import { useDispatch } from "react-redux";
 interface Props {
   params: {
     propertyId: string;
@@ -24,18 +32,72 @@ const PropertyDetails = ({ params }: Props) => {
   const [show, setShow] = useState<boolean>(false);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
 
+  const dispatch = useDispatch();
+
+  const handelRentNow = () => {
+    toast.success("Rent Now");
+    dispatch(openModal());
+  };
+
   const { data, isLoading } = usePropertyQuery(params.propertyId);
 
-  console.log(data);
+  const { data: userData, isLoading: isUserLoading } = useHomeOwnerQuery(
+    data?.homeOwnerId?.id
+  );
+
+  console.log(userData);
 
   function numberWithCommas(x: number) {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  if (isLoading) return <Loading />;
+  if (isLoading || isLoading) return <Loading />;
+  // if (isLoading) return <Loading />;
 
   return (
     <div>
+      <UseModal
+        title="Please contact owner"
+        description="Please contact owner to rent this property click on the button below"
+      >
+        <div className="p-6 flex justify-between ">
+          <span>
+            <p>
+              <span className="font-bold">Name:</span>{" "}
+              {userData?.name?.firstName} {userData?.name?.lastName}
+            </p>
+            <p>
+              <span className="font-bold">Email:</span> {userData?.email}
+            </p>
+            <p>
+              <span className="font-bold">Phone:</span> {userData?.contactNo}
+            </p>
+            <p>
+              <span className="font-bold">Address:</span>{" "}
+              {userData?.permanentAddress}
+            </p>
+          </span>
+          <span>
+            <Image
+              className="w-[100px] h-[100px] rounded-full"
+              src={userData?.profileImage}
+              alt=""
+              width={100}
+              height={100}
+            />
+          </span>
+        </div>
+        <div className="p-6 flex justify-between">
+          <Link href={`tell:+88 ${userData?.contactNo}`}>
+            <Button className="">
+              <PhoneCall />
+              &nbsp;&nbsp; Call Now
+            </Button>
+          </Link>
+          <p className="p-3 rounded-lg ">+88 {userData?.contactNo}</p>
+        </div>
+      </UseModal>
+
       <div className="w-full h-[300px] bg-[#EBF6FF] rounded-lg"></div>
 
       <Container>
@@ -123,7 +185,7 @@ const PropertyDetails = ({ params }: Props) => {
             </div>
           </div>
           <div className="col-span-2">
-            <div className="flex justify-between">
+            <div className="flex justify-between mt-3">
               <h1 className="text-4xl font-bold ">
                 {numberWithCommas(data?.home?.price)}৳ Rent
               </h1>
@@ -137,13 +199,18 @@ const PropertyDetails = ({ params }: Props) => {
                 </span>
               </div>
             </div>
-            <div className="flex justify-center gap-10  mt-4 py-3 rounded-md items-center"></div>
 
-            <div className="border rounded-md p-2 bg-white shadow">
-              <button className="bg-[#FFD600] w-full py-3 mt-5 rounded-md text-white">
-                Book Now
+            <div className="border rounded-md p-2 bg-white shadow mt-5">
+              <button
+                onClick={handelRentNow}
+                className="bg-[#FFD600] w-full py-3 mt-5 rounded-md text-white"
+              >
+                Rnt Now
               </button>
-              <button className="bg-[#27A9DF] w-full py-3 mt-5 rounded-md text-white">
+              <button
+                onClick={handelRentNow}
+                className="bg-[#27A9DF] w-full py-3 mt-5 rounded-md text-white"
+              >
                 Contact Owner
               </button>
             </div>
@@ -197,32 +264,8 @@ const PropertyDetails = ({ params }: Props) => {
               </div>
             </div>
           </div>
-          {/* <div className="col-span-5">
-            <h1 className="text-2xl font-bold">
-              Owner Behaviors Common Question
-            </h1>
-
-            <div className="grid grid-cols-2 gap-5">
-              {data?.ownerBehaviourCommonQuestion?.map(
-                (item: any, i: number) => (
-                  <div key={i} className="col-span-1">
-                    <p className="font-bold">{item.question}</p>
-                    <ul className="list-disc list-inside">
-                      {item.answers?.map((answer: any, i: any) => (
-                        <li key={i}>
-                          <span className="">{answer}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )
-              )}
-            </div>
-          
-          </div> */}
           <OwnerBehaviorsCommonQuestions data={data} />
-
-          <RatingAndReviews />
+          <RatingAndReviews propertyesId={params.propertyId} />
         </div>
       </Container>
     </div>
