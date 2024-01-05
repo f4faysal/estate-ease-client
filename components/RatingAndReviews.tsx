@@ -4,10 +4,13 @@ import Loading from "@/app/loading";
 import { useMyProfileQuery } from "@/redux/api/authApi";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Button } from "./ui/button";
 
-const RatingAndReviews = ({ propertyesId }: any) => {
+const RatingAndReviews = ({ propertyesId, isUserLogin }: any) => {
   const { data, isLoading } = useMyProfileQuery({});
   const [reviews, setReviews] = useState([]);
+
+  console.log(isUserLogin);
 
   useEffect(() => {
     // Retrieve reviews from local storage on component mount
@@ -172,12 +175,10 @@ const RatingAndReviews = ({ propertyesId }: any) => {
         </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
-        >
+
+        <Button disabled={!isUserLogin} type="submit" className="w-full">
           Submit Review
-        </button>
+        </Button>
       </form>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8">

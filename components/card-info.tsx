@@ -14,6 +14,7 @@ import { PiMapPin } from "react-icons/pi";
 import { useDispatch } from "react-redux";
 import UseModal from "./reusable-ui/admin-modal";
 import { Button } from "./ui/button";
+import { PhoneCall } from "lucide-react";
 
 const CardInfo = ({ propertys }: any) => {
   const { userId } = getUserInfo() as any;
@@ -34,12 +35,44 @@ const CardInfo = ({ propertys }: any) => {
         description="Please contact owner to rent this property click on the button below"
       >
         {userId ? (
-          <div className="p-6 flex justify-between">
-            <button className="w-1/2 text-center border rounded-lg bg-[#22d12b] capitalize text-black hover:bg-[#b8d9f0] text-[14px] p-1 transform transition duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95">
-              <Link href={`tell:${data?.contactNo}`}>Call Now</Link>
-            </button>
-            <p className="p-3 border rounded-lg ">{data?.contactNo}</p>
-          </div>
+          <>
+            <div className="p-6 flex justify-between ">
+              <span>
+                <p>
+                  <span className="font-bold">Name:</span>{" "}
+                  {data?.name?.firstName} {data?.name?.lastName}
+                </p>
+                <p>
+                  <span className="font-bold">Email:</span> {data?.email}
+                </p>
+                <p>
+                  <span className="font-bold">Phone:</span> {data?.contactNo}
+                </p>
+                <p>
+                  <span className="font-bold">Address:</span>{" "}
+                  {data?.permanentAddress}
+                </p>
+              </span>
+              <span>
+                <Image
+                  className="w-[100px] h-[100px] rounded-full"
+                  src={data?.profileImage}
+                  alt=""
+                  width={100}
+                  height={100}
+                />
+              </span>
+            </div>
+            <div className="p-6 flex justify-between">
+              <Link href={`tell:+88 ${data?.contactNo}`}>
+                <Button className="">
+                  <PhoneCall />
+                  &nbsp;&nbsp; Call Now
+                </Button>
+              </Link>
+              <p className="p-3 rounded-lg ">+88 {data?.contactNo}</p>
+            </div>
+          </>
         ) : (
           <div className="py-4">
             <p className="py-5 text-xl">Please login to rent this property</p>

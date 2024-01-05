@@ -63,8 +63,8 @@ const UserSignUp = () => {
           <p className="text-xs text-slate-400 text-center">
             Please fill up the form to create a new account rent or buy
             property. <br /> Become a&nbsp;
-            <span className="font-semibold hover:underline text-black ">
-              <Link href="/sign-up-home-owner">Home Owner</Link>
+            <span className="hover:underline font-bold text-[#27AAE0] text-lg ">
+              <Link href="/sign-up-home-owner">(Home Owner)</Link>
             </span>
           </p>
         </div>
@@ -160,7 +160,7 @@ const UserSignUp = () => {
                     name="rentUser.dateOfBirth"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Det of Birth</FormLabel>
+                        <FormLabel>Date of Birth</FormLabel>
                         <FormControl>
                           <Input
                             // disabled={loading}
