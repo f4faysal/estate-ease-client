@@ -62,7 +62,7 @@ const SingUpOwner = () => {
 
           <p className="text-xs text-slate-400">
             Please fill up the form to create a new account rent or sell your
-            property. 
+            property.
           </p>
         </div>
 
@@ -157,7 +157,7 @@ const SingUpOwner = () => {
                     name="homeOwner.dateOfBirth"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Det of Birth</FormLabel>
+                        <FormLabel>Date of Birth</FormLabel>
                         <FormControl>
                           <Input
                             // disabled={loading}

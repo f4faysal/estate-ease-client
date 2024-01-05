@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Button } from "./ui/button";
 
-const OwnerBehaviorsCommonQuestions = ({ data }: any) => {
+const OwnerBehaviorsCommonQuestions = ({ data, isUserLogin }: any) => {
   const [checkedStates, setCheckedStates] = useState<Record<string, string[]>>(
     {}
   );
@@ -67,7 +67,11 @@ const OwnerBehaviorsCommonQuestions = ({ data }: any) => {
         ))}
       </div>
       {/* Submit Button */}
-      <Button className="py-2" onClick={handleSaveToLocal}>
+      <Button
+        disabled={!isUserLogin}
+        className="py-2 w-full"
+        onClick={handleSaveToLocal}
+      >
         Submit
       </Button>
     </div>

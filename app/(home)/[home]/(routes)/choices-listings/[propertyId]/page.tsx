@@ -10,6 +10,7 @@ import Container from "@/components/ui/container";
 import { useHomeOwnerQuery } from "@/redux/api/homeOwnersApi";
 import { usePropertyQuery } from "@/redux/api/propertysApi";
 import { openModal } from "@/redux/features/modal/modalSlice";
+import { getUserInfo } from "@/services/auth.service";
 import { HomeIcon, MapIcon, MapPinIcon, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,6 +30,7 @@ interface Props {
 }
 
 const PropertyDetails = ({ params }: Props) => {
+  const { userId } = getUserInfo() as any;
   const [show, setShow] = useState<boolean>(false);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
 
@@ -38,6 +40,8 @@ const PropertyDetails = ({ params }: Props) => {
     toast.success("Rent Now");
     dispatch(openModal());
   };
+
+  console.log(userId);
 
   const { data, isLoading } = usePropertyQuery(params.propertyId);
 
@@ -51,7 +55,7 @@ const PropertyDetails = ({ params }: Props) => {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  if (isLoading || isLoading) return <Loading />;
+  if (isLoading || isUserLoading) return <Loading />;
   // if (isLoading) return <Loading />;
 
   return (
@@ -60,42 +64,54 @@ const PropertyDetails = ({ params }: Props) => {
         title="Please contact owner"
         description="Please contact owner to rent this property click on the button below"
       >
-        <div className="p-6 flex justify-between ">
-          <span>
-            <p>
-              <span className="font-bold">Name:</span>{" "}
-              {userData?.name?.firstName} {userData?.name?.lastName}
-            </p>
-            <p>
-              <span className="font-bold">Email:</span> {userData?.email}
-            </p>
-            <p>
-              <span className="font-bold">Phone:</span> {userData?.contactNo}
-            </p>
-            <p>
-              <span className="font-bold">Address:</span>{" "}
-              {userData?.permanentAddress}
-            </p>
-          </span>
-          <span>
-            <Image
-              className="w-[100px] h-[100px] rounded-full"
-              src={userData?.profileImage}
-              alt=""
-              width={100}
-              height={100}
-            />
-          </span>
-        </div>
-        <div className="p-6 flex justify-between">
-          <Link href={`tell:+88 ${userData?.contactNo}`}>
-            <Button className="">
-              <PhoneCall />
-              &nbsp;&nbsp; Call Now
-            </Button>
-          </Link>
-          <p className="p-3 rounded-lg ">+88 {userData?.contactNo}</p>
-        </div>
+        {userId ? (
+          <>
+            <div className="p-6 flex justify-between ">
+              <span>
+                <p>
+                  <span className="font-bold">Name:</span>{" "}
+                  {userData?.name?.firstName} {userData?.name?.lastName}
+                </p>
+                <p>
+                  <span className="font-bold">Email:</span> {userData?.email}
+                </p>
+                <p>
+                  <span className="font-bold">Phone:</span>{" "}
+                  {userData?.contactNo}
+                </p>
+                <p>
+                  <span className="font-bold">Address:</span>{" "}
+                  {userData?.permanentAddress}
+                </p>
+              </span>
+              <span>
+                <Image
+                  className="w-[100px] h-[100px] rounded-full"
+                  src={userData?.profileImage}
+                  alt=""
+                  width={100}
+                  height={100}
+                />
+              </span>
+            </div>
+            <div className="p-6 flex justify-between">
+              <Link href={`tell:+88 ${userData?.contactNo}`}>
+                <Button className="">
+                  <PhoneCall />
+                  &nbsp;&nbsp; Call Now
+                </Button>
+              </Link>
+              <p className="p-3 rounded-lg ">+88 {userData?.contactNo}</p>
+            </div>
+          </>
+        ) : (
+          <div className="py-4">
+            <p className="py-5 text-xl">Please login to rent this property</p>
+            <Link href={`/sign-in`}>
+              <Button className="w-full mt-3">Login</Button>
+            </Link>
+          </div>
+        )}
       </UseModal>
 
       <div className="w-full h-[300px] bg-[#EBF6FF] rounded-lg"></div>
@@ -185,33 +201,26 @@ const PropertyDetails = ({ params }: Props) => {
             </div>
           </div>
           <div className="col-span-2">
-            <div className="flex justify-between mt-3">
-              <h1 className="text-4xl font-bold ">
-                {numberWithCommas(data?.home?.price)}৳ Rent
-              </h1>
-              <div className="flex gap-5 items-center justify-center">
-                <span className="text-xl font-bold flex items-center">
-                  <IoIosStar className="text-yellow-500" />
-                  4.5
-                </span>
-                <span className="text-xl font-bold flex items-center">
-                  117 reviews
-                </span>
-              </div>
-            </div>
-
             <div className="border rounded-md p-2 bg-white shadow mt-5">
+              <div className="flex justify-between mt-3">
+                <h1 className="text-4xl font-bold ">
+                  {numberWithCommas(data?.home?.price)}৳ Rent
+                </h1>
+                <div className="flex gap-5 items-center justify-center">
+                  <span className="text-xl font-bold flex items-center">
+                    <IoIosStar className="text-yellow-500" />
+                    4.5
+                  </span>
+                  <span className="text-xl font-bold flex items-center">
+                    117 reviews
+                  </span>
+                </div>
+              </div>
               <button
                 onClick={handelRentNow}
-                className="bg-[#FFD600] w-full py-3 mt-5 rounded-md text-white"
+                className=" w-full py-3 mt-8  text-white border rounded-lg bg-[#A2DAC7] capitalize hover:bg-[#88dcc0] text-[14px] p-1 transform transition duration-500 shadow-md focus:outline-none focus:ring-2 focus:ring-[#26aae1] focus:ring-opacity-75 focus:scale-95 "
               >
-                Rnt Now
-              </button>
-              <button
-                onClick={handelRentNow}
-                className="bg-[#27A9DF] w-full py-3 mt-5 rounded-md text-white"
-              >
-                Contact Owner
+                Rent Now
               </button>
             </div>
           </div>
@@ -264,8 +273,11 @@ const PropertyDetails = ({ params }: Props) => {
               </div>
             </div>
           </div>
-          <OwnerBehaviorsCommonQuestions data={data} />
-          <RatingAndReviews propertyesId={params.propertyId} />
+          <OwnerBehaviorsCommonQuestions isUserLogin={!!userId} data={data} />
+          <RatingAndReviews
+            isUserLogin={!!userId}
+            propertyesId={params.propertyId}
+          />
         </div>
       </Container>
     </div>
