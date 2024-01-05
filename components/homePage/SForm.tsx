@@ -197,7 +197,7 @@ const SForm = () => {
                     control={form.control}
                     name="homeSize"
                     render={({ field }) => (
-                      <Input {...field} placeholder="Area (sqft)" />
+                      <Input {...field} placeholder="Area(sqft)" />
                     )}
                   />
                   <FormField
